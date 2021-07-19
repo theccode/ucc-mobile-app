@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">UCC App</string>
+    <string name="profile_picture">Profile picture</string>
+    <string name="search_icon">Search icon</string>
+    <string name="student_s_portal">Student\'s Portal</string>
+    <string name="favourited_trending">Favourited Trending</string>
+    <string name="graduation">The management of the University of Cape Coast (UCC) has released the graduation list for 2021</string>
+</resources>
