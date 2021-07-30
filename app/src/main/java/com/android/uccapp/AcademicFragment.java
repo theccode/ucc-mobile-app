@@ -49,7 +49,7 @@ public class AcademicFragment extends Fragment {
          ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
          adapter.addFragment(new ProfileFragment(), "Profile");
          adapter.addFragment(new ResultFragment(), "Result");
-         adapter.addFragment(new RegisterFragment(), "Registeration");
+         adapter.addFragment(new RegisterFragment(), "Registration");
          viewPager.setAdapter(adapter);
     }
 
