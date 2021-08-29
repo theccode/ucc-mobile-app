@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+    <ImageView
+        android:id="@+id/ivRCCourse"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/img_border"
+        android:src="@drawable/students"/>
+    <TextView
+        android:id="@+id/tvDepartmentName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Betty Ablorh"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        android:textSize="22dp"
+        android:layout_toEndOf="@id/ivRCCourse"
+        android:paddingStart="15dp"
+        android:layout_toRightOf="@id/ivRCCourse"
+        android:paddingLeft="15dp" />
+    <TextView
+        android:id="@+id/tvDepartmentCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PS/CSC/17/0027"
+        android:layout_below="@+id/tvDepartmentName"
+        android:layout_toEndOf="@id/ivRCCourse"
+        android:paddingStart="15dp"
+        android:layout_toRightOf="@id/ivRCCourse"
+        android:paddingLeft="15dp" />
+    <TextView
+        android:id="@+id/tvCollegeOrSchool"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Level: 400"
+        android:layout_below="@+id/tvDepartmentCode"
+        android:layout_toEndOf="@id/ivRCCourse"
+        android:paddingStart="15dp"
+        android:layout_toRightOf="@id/ivRCCourse"
+        android:paddingLeft="15dp" />
+</RelativeLayout>

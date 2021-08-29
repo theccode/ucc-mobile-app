@@ -1,0 +1,20 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="UCCAppMaterialTheme" parent="UCCAppMaterialTheme.Base"></style>
+    <style name="UCCAppMaterialTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAcc</item>
+    </style>
+    <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeColor">#FFFFFF</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="android:textColorHint">#FFFFFF</item>
+    </style>
+    <style name="DatePickerTheme" parent="UCCAppMaterialTheme.Base">
+        <item name="colorPrimary">@color/colorPrimary</item>
+    </style>
+</resources>

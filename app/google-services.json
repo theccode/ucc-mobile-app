@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "362049508555",
+    "firebase_url": "https://ucc-mobile-app-default-rtdb.firebaseio.com",
+    "project_id": "ucc-mobile-app",
+    "storage_bucket": "ucc-mobile-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:362049508555:android:bc2926f84587f3a820f74e",
+        "android_client_info": {
+          "package_name": "com.android.uccapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "362049508555-njbsjcoo9v9mvvm3fpuesfpa1c99gous.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.uccapp",
+            "certificate_hash": "5ff75a44a26eb6093b870338845884d2d673d318"
+          }
+        },
+        {
+          "client_id": "362049508555-62fpvt5lef035mj8bpe9p9t3i5jpbfdo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBA0xuot1ie8ohTfVL2LEkM_jPh75twSL8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "362049508555-62fpvt5lef035mj8bpe9p9t3i5jpbfdo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

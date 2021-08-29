@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/tvInstruction"
+        style="?android:listSeparatorTextViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="compulsory courses"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/colorWhite"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:textSize="16sp"
+        />
+    <LinearLayout
+        android:id="@+id/tvContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvInstruction"
+        android:layout_marginTop="20dp">
+        <TextView
+            android:id="@+id/tvDepartmentName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CSC 101-Introduction into Computing."
+            android:layout_below="@+id/tvInstruction"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp" />
+        <TextView
+            android:id="@+id/tvCreditHours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3 C.hrs"
+            android:layout_toEndOf="@+id/tvDepartmentName"
+            android:layout_below="@+id/tvInstruction"
+            android:layout_marginStart="5dp"
+            android:layout_toRightOf="@+id/tvDepartmentName"
+            android:layout_marginLeft="5dp" />
+        <CheckBox
+            android:id="@+id/cbCourseSelect"
+            android:checked="true"
+            android:clickable="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvInstruction"
+            android:layout_toEndOf="@+id/tvCreditHours"
+            android:layout_toRightOf="@+id/tvCreditHours"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/tvContainer2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvContainer"
+        android:layout_marginTop="5dp">
+        <TextView
+            android:id="@+id/tvDepartmentName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CSC 101-Introduction into Computing."
+            android:layout_below="@+id/tvInstruction"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp" />
+        <TextView
+            android:id="@+id/tvCreditHours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3 C.hrs"
+            android:layout_toEndOf="@+id/tvDepartmentName"
+            android:layout_below="@+id/tvInstruction"
+            android:layout_marginStart="5dp"
+            android:layout_toRightOf="@+id/tvDepartmentName"
+            android:layout_marginLeft="5dp" />
+        <CheckBox
+            android:id="@+id/cbCourseSelect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:clickable="false"
+            android:layout_below="@+id/tvInstruction"
+            android:layout_toEndOf="@+id/tvCreditHours"
+            android:layout_toRightOf="@+id/tvCreditHours"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/tvContainer3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvContainer2"
+        android:layout_marginTop="5dp">
+        <TextView
+            android:id="@+id/tvDepartmentName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CSC 101-Introduction into Computing."
+            android:layout_below="@+id/tvInstruction"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp" />
+        <TextView
+            android:id="@+id/tvCreditHours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3 C.hrs"
+            android:layout_toEndOf="@+id/tvDepartmentName"
+            android:layout_below="@+id/tvInstruction"
+            android:layout_marginStart="5dp"
+            android:layout_toRightOf="@+id/tvDepartmentName"
+            android:layout_marginLeft="5dp" />
+        <CheckBox
+            android:id="@+id/cbCourseSelect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:clickable="false"
+            android:layout_below="@+id/tvInstruction"
+            android:layout_toEndOf="@+id/tvCreditHours"
+            android:layout_toRightOf="@+id/tvCreditHours"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/tvContainer4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvContainer3"
+        android:layout_marginTop="5dp">
+        <TextView
+            android:id="@+id/tvDepartmentName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CSC 101-Introduction into Computing."
+            android:layout_below="@+id/tvInstruction"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp" />
+        <TextView
+            android:id="@+id/tvCreditHours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3 C.hrs"
+            android:layout_toEndOf="@+id/tvDepartmentName"
+            android:layout_below="@+id/tvInstruction"
+            android:layout_marginStart="5dp"
+            android:layout_toRightOf="@+id/tvDepartmentName"
+            android:layout_marginLeft="5dp" />
+        <CheckBox
+            android:id="@+id/cbCourseSelect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:clickable="false"
+            android:layout_below="@+id/tvInstruction"
+            android:layout_toEndOf="@+id/tvCreditHours"
+            android:layout_toRightOf="@+id/tvCreditHours"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp" />
+    </LinearLayout>
+   <LinearLayout
+       android:id="@+id/tvContainer5"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_below="@+id/tvContainer4">
+       <TextView
+           android:id="@+id/tvOptional"
+           style="?android:listSeparatorTextViewStyle"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="Optional courses"
+           android:layout_below="@+id/tvContainer4"
+           android:gravity="center"
+           android:textSize="16sp"
+           android:textColor="@color/colorWhite"
+           android:background="@color/colorPrimary"/>
+   </LinearLayout>
+    <LinearLayout
+        android:id="@+id/tvContainer6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvContainer5"
+        android:layout_marginTop="5dp">
+        <TextView
+            android:id="@+id/tvDepartmentName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="CSC 101-Introduction into Computing."
+            android:layout_below="@+id/tvInstruction"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp" />
+        <TextView
+            android:id="@+id/tvCreditHours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3 C.hrs"
+            android:layout_toEndOf="@+id/tvDepartmentName"
+            android:layout_below="@+id/tvInstruction"
+            android:layout_marginStart="5dp"
+            android:layout_toRightOf="@+id/tvDepartmentName"
+            android:layout_marginLeft="5dp" />
+        <CheckBox
+            android:id="@+id/cbCourseSelect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvInstruction"
+            android:layout_toEndOf="@+id/tvCreditHours"
+            android:layout_toRightOf="@+id/tvCreditHours"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/tvContainer7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvContainer6"
+        android:layout_marginTop="5dp">
+        <TextView
+            android:id="@+id/tvDepartmentName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CSC 101-Introduction into Computing."
+            android:layout_below="@+id/tvInstruction"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp" />
+        <TextView
+            android:id="@+id/tvCreditHours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3 C.hrs"
+            android:layout_toEndOf="@+id/tvDepartmentName"
+            android:layout_below="@+id/tvInstruction"
+            android:layout_marginStart="5dp"
+            android:layout_toRightOf="@+id/tvDepartmentName"
+            android:layout_marginLeft="5dp" />
+        <CheckBox
+            android:id="@+id/cbCourseSelect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvInstruction"
+            android:layout_toEndOf="@+id/tvCreditHours"
+            android:layout_toRightOf="@+id/tvCreditHours"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/tvContainer7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvContainer6"
+        android:layout_marginTop="5dp">
+        <TextView
+            android:id="@+id/tvDepartmentName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CSC 101-Introduction into Computing."
+            android:layout_below="@+id/tvInstruction"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp" />
+        <TextView
+            android:id="@+id/tvCreditHours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3 C.hrs"
+            android:layout_toEndOf="@+id/tvDepartmentName"
+            android:layout_below="@+id/tvInstruction"
+            android:layout_marginStart="5dp"
+            android:layout_toRightOf="@+id/tvDepartmentName"
+            android:layout_marginLeft="5dp" />
+        <CheckBox
+            android:id="@+id/cbCourseSelect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvInstruction"
+            android:layout_toEndOf="@+id/tvCreditHours"
+            android:layout_toRightOf="@+id/tvCreditHours"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/tvContainer8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvContainer7"
+        android:layout_marginTop="5dp">
+        <TextView
+            android:id="@+id/tvDepartmentName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CSC 101-Introduction into Computing."
+            android:layout_below="@+id/tvInstruction"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp" />
+        <TextView
+            android:id="@+id/tvCreditHours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3 C.hrs"
+            android:layout_toEndOf="@+id/tvDepartmentName"
+            android:layout_below="@+id/tvInstruction"
+            android:layout_marginStart="5dp"
+            android:layout_toRightOf="@+id/tvDepartmentName"
+            android:layout_marginLeft="5dp" />
+        <CheckBox
+            android:id="@+id/cbCourseSelect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvInstruction"
+            android:layout_toEndOf="@+id/tvCreditHours"
+            android:layout_toRightOf="@+id/tvCreditHours"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/tvContainer9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/tvContainer8">
+        <Button
+            android:id="@+id/btnRegister"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="Register"
+            android:background="@color/colorRed"
+            android:textColor="@color/colorWhite"/>
+    </LinearLayout>
+</RelativeLayout>
