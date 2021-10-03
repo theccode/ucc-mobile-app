@@ -127,6 +127,16 @@
                   android:drawableLeft="@drawable/credithours"
                   android:drawablePadding="15dp"/>
           </android.support.design.widget.TextInputLayout>
+          <Button
+              android:id="@+id/btnAddCourse"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Add For Registration"
+              android:layout_gravity="center"
+              android:background="@color/colorPrimary"
+              android:textColor="@color/colorPrimaryLight"
+              android:padding="16dp"
+              android:layout_margin="16dp"/>
       </LinearLayout>
    </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

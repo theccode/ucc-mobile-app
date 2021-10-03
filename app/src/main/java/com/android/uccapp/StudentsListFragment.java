@@ -15,13 +15,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.uccapp.model.ConfigUtility;
+import com.android.uccapp.model.Student;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,13 +64,15 @@ public class StudentsListFragment extends Fragment {
         private TextView mFullNameTextView;
         private TextView mIndexTextView;
         private TextView mLevelTextView;
+        private ImageView mProfileImage;
         public StudentsHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.student_list_person, parent, false));
 
             itemView.setOnClickListener(this);
             mFullNameTextView = (TextView) itemView.findViewById(R.id.tvDepartmentName);
             mIndexTextView = (TextView) itemView.findViewById(R.id.tvDepartmentCode);
-            mLevelTextView = (TextView) itemView.findViewById(R.id.tvCollegeOrSchool);
+            mLevelTextView = (TextView) itemView.findViewById(R.id.tvSemester);
+            mProfileImage = (ImageView) itemView.findViewById(R.id.ivProfileImage);
         }
 
         @Override
@@ -77,9 +83,19 @@ public class StudentsListFragment extends Fragment {
         }
         public  void bind(Student student){
             mStudent = student;
-            mFullNameTextView.setText(student.getFirstName() + " " + student.getLastName());
-            mIndexTextView.setText(student.getStudentsId().replace("_", "/"));
-            mLevelTextView.setText(student.getLevel());
+            mFullNameTextView.setText(mStudent.getFirstName() + " " + mStudent.getLastName());
+            mIndexTextView.setText(mStudent.getStudentsId().replace("_", "/")); //fix to be done later
+            mLevelTextView.setText(mStudent.getLevel());
+            showImage(mStudent.getPhotoUrl());
+        }
+        private void showImage(String imagePath){
+            if (imagePath != null && imagePath.isEmpty() == false){
+                Picasso.with(getContext())
+                        .load(imagePath)
+                        .resize(45, 45)
+                        .centerCrop()
+                        .into(mProfileImage);
+            }
         }
     }
 
@@ -106,6 +122,7 @@ public class StudentsListFragment extends Fragment {
         public int getItemCount() {
             return mStudentList.size();
         }
+
     }
     @Override
     public void onResume() {

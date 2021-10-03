@@ -1,4 +1,4 @@
-package com.android.uccapp;
+package com.android.uccapp.model;
 
 public class Department {
     private String mDepartmentCode;

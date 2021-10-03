@@ -1,4 +1,4 @@
-package com.android.uccapp;
+package com.android.uccapp.model;
 
 public class Course {
     private String courseName;
@@ -7,6 +7,7 @@ public class Course {
     private String department;
     private String level;
     private String semester;
+    private boolean isEnabledForRegistration;
 
     public Course() {
     }
@@ -57,5 +58,11 @@ public class Course {
 
     public void setSemester(String semester) {
         this.semester = semester;
+    }
+    public boolean getIsEnabledForRegistration(){
+        return this.isEnabledForRegistration;
+    }
+    public void setIsEnabledForRegistration(boolean isEnabled){
+        this.isEnabledForRegistration = isEnabled;
     }
 }

@@ -116,7 +116,7 @@
               android:layout_height="wrap_content"
               android:paddingLeft="5dp">
               <android.support.design.widget.TextInputEditText
-                  android:id="@+id/etRegistrationNumber"
+                  android:id="@+id/etAcademicYear"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:hint="Registration Number"
@@ -180,16 +180,16 @@
               android:layout_marginTop="10dp"
               android:layout_marginBottom="10dp">
               <TextView
-                  android:id="@+id/tvCollegeOrSchool"
+                  android:id="@+id/tvSemester"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:text="Level:"/>
               <Spinner
                   android:id="@+id/sLevel"
                   android:layout_width="wrap_content"
-                  android:layout_toEndOf="@+id/tvCollegeOrSchool"
+                  android:layout_toEndOf="@+id/tvSemester"
                   android:layout_height="wrap_content"
-                  android:layout_toRightOf="@+id/tvCollegeOrSchool" />
+                  android:layout_toRightOf="@+id/tvSemester" />
               <TextView
                   android:id="@+id/tvGender"
                   android:layout_width="wrap_content"
@@ -245,12 +245,10 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:paddingLeft="5dp">
-
               <android.support.design.widget.TextInputEditText
                   android:id="@+id/etEmailAddress"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-
                   android:drawableStart="@drawable/ic_email"
                   android:drawableLeft="@drawable/ic_email"
                   android:drawablePadding="15dp"
@@ -271,6 +269,11 @@
                   android:drawableLeft="@drawable/ic_android_phone"
                   android:drawablePadding="15dp"/>
           </android.support.design.widget.TextInputLayout>
+          <CheckBox
+              android:id="@+id/cbAdmin"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Administrator"/>
       </LinearLayout>
   </RelativeLayout>
 </android.support.v4.widget.NestedScrollView>

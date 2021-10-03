@@ -1,6 +1,5 @@
 package com.android.uccapp;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,9 +17,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.android.uccapp.model.ConfigUtility;
+import com.android.uccapp.model.Course;
+import com.android.uccapp.model.CourseForRegistration;
+import com.android.uccapp.model.Department;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,22 +36,28 @@ public class CourseFragment extends Fragment {
     private EditText mCourseTitleEditText;
     private EditText mCreditHoursEditText;
     private Spinner mDepartmentSpinner;
+    private CourseForRegistration mCourseForRegistration;
     private Spinner mLevelSpinner;
     private Spinner mSemesterSpinner;
     private Toolbar mToolbar;
+    private Button mAddCourseButton;
     private final String[] mLevels = new String[]{"100", "200", "300", "400", "500", "600", "700", "800"};
-    private final String[] mSemesters = new String[]{"Semester 1", "Semester 2"};
+    private final String[] mSemesters = new String[]{"1", "2"};
     private ArrayAdapter<String> mLevelArrayAdapter;
     private ArrayAdapter<String> mSemesterArrayAdapter;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
     private Course mCourse;
     private String mCourseCode;
-    private static final String ARG_COURSE_CODE = "com.android.uccapp.course_code";
+    private String mUserId;
+    private static final String ARG_COURSE_CODE = "com.android.uccapp.courseCode";
+    private static final String ARG_USERID = "com.android.uccapp.userId";
+    private static final String BUNDLE_CODE = "com.android.uccapp.bundleCode";
 
-    public static CourseFragment newInstance(String courseCode){
+    public static CourseFragment newInstance(String courseCode, String userId){
         Bundle bundle = new Bundle();
         bundle.putString(ARG_COURSE_CODE,courseCode);
+        bundle.putString(ARG_USERID, userId);
         CourseFragment courseFragment = new CourseFragment();
         courseFragment.setArguments(bundle);
         return courseFragment;
@@ -68,7 +78,12 @@ public class CourseFragment extends Fragment {
         ((AppCompatActivity)getActivity()).setSupportActionBar(mToolbar);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mCourseCode = (String) getArguments().getSerializable(ARG_COURSE_CODE);
+        if (savedInstanceState != null){
+            mUserId = savedInstanceState.getString(BUNDLE_CODE);
+        }
+        mUserId = (String) getArguments().getString(ARG_USERID);
         mCourse = new Course();
+        mCourseForRegistration = new CourseForRegistration();
         setHasOptionsMenu(true);
         mCourseCodeEditText = (EditText) view.findViewById(R.id.etCourseCode);
         mCourseCodeEditText.addTextChangedListener(new TextWatcher() {
@@ -127,6 +142,37 @@ public class CourseFragment extends Fragment {
         mLevelSpinner.setAdapter(mLevelArrayAdapter);
         mSemesterArrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, mSemesters);
         mSemesterSpinner.setAdapter(mSemesterArrayAdapter);
+        mAddCourseButton = (Button) view.findViewById(R.id.btnAddCourse);
+        mAddCourseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String[] depCode = mUserId.split("_");
+                Log.d("CODE", depCode[1]);
+                DatabaseReference depRef = FirebaseDatabase.getInstance().getReference("departments");
+                depRef.child(depCode[1]).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        DatabaseReference regReference = FirebaseDatabase.getInstance().getReference("RegistrableCourses");
+                       mCourseForRegistration.setCourseCode(mCourse.getCourseCode());
+                       mCourseForRegistration.setCourseTitle(mCourse.getCourseName());
+                       mCourseForRegistration.setNumOfCreditHours(mCourse.getCreditHours());
+                        Department department = dataSnapshot.getValue(Department.class);
+                        String depName = department.getDepartmentName().replaceAll("\\s+", "");
+                       regReference.child(depName).child(mCourse.getCourseCode()).setValue(mCourseForRegistration);
+//                regReference.setValue()
+                        Log.d("DEP", dataSnapshot.getValue().toString());
+                        Log.d("NAME", depName);
+//                        Toast.makeText(getActivity(), "" + dataSnapshot.toString(), Toast.LENGTH_LONG ).show();
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+            }
+        });
         if (mCourseCode != null){
             mDatabaseReference.child(mCourseCode).addValueEventListener(new ValueEventListener() {
                 @Override
@@ -192,5 +238,11 @@ public class CourseFragment extends Fragment {
                 return true;
             default:return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(BUNDLE_CODE, mUserId);
     }
 }

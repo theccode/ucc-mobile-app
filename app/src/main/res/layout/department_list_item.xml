@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:padding="10dp">
             <ImageView
-                android:id="@+id/ivRCCourse"
+                android:id="@+id/ivProfileImage"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:src="@drawable/department_icon"/>
@@ -34,9 +34,9 @@
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold"
                 android:textSize="22dp"
-                android:layout_toEndOf="@id/ivRCCourse"
+                android:layout_toEndOf="@id/ivProfileImage"
                 android:paddingStart="15dp"
-                android:layout_toRightOf="@id/ivRCCourse"
+                android:layout_toRightOf="@id/ivProfileImage"
                 android:paddingLeft="15dp" />
             <TextView
                 android:id="@+id/tvDepartmentCode"
@@ -44,19 +44,19 @@
                 android:layout_height="wrap_content"
                 android:text="Department Code: CSC"
                 android:layout_below="@+id/tvDepartmentName"
-                android:layout_toEndOf="@id/ivRCCourse"
+                android:layout_toEndOf="@id/ivProfileImage"
                 android:paddingStart="15dp"
-                android:layout_toRightOf="@id/ivRCCourse"
+                android:layout_toRightOf="@id/ivProfileImage"
                 android:paddingLeft="15dp" />
             <TextView
-                android:id="@+id/tvCollegeOrSchool"
+                android:id="@+id/tvSemester"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="School of Physical Sciences"
                 android:layout_below="@+id/tvDepartmentCode"
-                android:layout_toEndOf="@id/ivRCCourse"
+                android:layout_toEndOf="@id/ivProfileImage"
                 android:paddingStart="15dp"
-                android:layout_toRightOf="@id/ivRCCourse"
+                android:layout_toRightOf="@id/ivProfileImage"
                 android:paddingLeft="15dp" />
         </RelativeLayout>
     </LinearLayout>

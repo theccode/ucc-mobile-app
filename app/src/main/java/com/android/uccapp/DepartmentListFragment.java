@@ -1,12 +1,9 @@
 package com.android.uccapp;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,8 +16,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.android.uccapp.model.ConfigUtility;
+import com.android.uccapp.model.Department;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -74,7 +72,7 @@ public class DepartmentListFragment extends Fragment {
            super(inflater.inflate(R.layout.department_list_item, parent, false));
            mDepartmentNameTextView = (TextView) itemView.findViewById(R.id.tvDepartmentName);
            mDepartmentCodeTextView = (TextView) itemView.findViewById(R.id.tvDepartmentCode);
-           mCollegeOrSchool = (TextView) itemView.findViewById(R.id.tvCollegeOrSchool);
+           mCollegeOrSchool = (TextView) itemView.findViewById(R.id.tvSemester);
            itemView.setOnClickListener(this);
        }
 

@@ -19,6 +19,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.android.uccapp.model.ConfigUtility;
+import com.android.uccapp.model.Course;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,6 +38,16 @@ public class CoursesListFragment extends Fragment {
     private Course mCourse;
     private CourseAdapter mCourseAdapter;
     private RecyclerView mCourseRecyclerView;
+    private static final String ARG_USERID = "com.android.uccapp.userId";
+    private String mUserId;
+
+    public static CoursesListFragment newInstance(String userId){
+        Bundle args = new Bundle();
+        args.putString(ARG_USERID, userId);
+        CoursesListFragment coursesListFragment = new CoursesListFragment();
+        coursesListFragment.setArguments(args);
+        return coursesListFragment;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,6 +56,7 @@ public class CoursesListFragment extends Fragment {
         mFirebaseDatabase = ConfigUtility.mFirebaseDatabase;
         mDatabaseReference = ConfigUtility.mFirebaseReference;
         mCourses = new ArrayList<>();
+        mUserId = (String) getArguments().getString(ARG_USERID);
     }
 
     @Nullable
@@ -91,7 +104,7 @@ public class CoursesListFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
-            Intent intent = CourseActivity.newIntent(getContext(), mCourse.getCourseCode());
+            Intent intent = CourseActivity.newIntent(getContext(), mCourse.getCourseCode(), mUserId);
             startActivity(intent);
         }
     }

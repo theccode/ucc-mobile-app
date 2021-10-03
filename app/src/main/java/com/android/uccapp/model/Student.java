@@ -1,10 +1,11 @@
-package com.android.uccapp;
+package com.android.uccapp.model;
 
 import java.util.Date;
 import java.util.Map;
 
 public class Student {
     private String mStudentsId;
+    private String mPhotoUrl;
     private String mFirstName;
     private String mLastName;
     private String mDepartment;
@@ -16,12 +17,13 @@ public class Student {
     private String mLevel;
     private String mPhone;
     private String mEmailAddress;
+    private boolean mIsAdmin;
 
     public Student() {
         mDateOfBirth = new Date();
     }
 
-    public Student(String firstName, String lastName, String department, String programme, String major, String gender, Date dateOfBirth, String level, String phone, String emailAddress, Map<String, String> courses) {
+    public Student(String firstName, String lastName, String department, String programme, String major, String gender, Date dateOfBirth, String level, String phone, String emailAddress, Map<String, String> courses, String photoUrl, boolean isAdmin) {
         mFirstName = firstName;
         mLastName = lastName;
         mProgramme = programme;
@@ -32,6 +34,8 @@ public class Student {
         mLevel = level;
         mPhone = phone;
         mEmailAddress = emailAddress;
+        mPhotoUrl = photoUrl;
+        mIsAdmin = isAdmin;
     }
 
     public String getStudentsId() {
@@ -130,4 +134,19 @@ public class Student {
         mCourses = courses;
     }
 
+    public String getPhotoUrl() {
+        return mPhotoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.mPhotoUrl = photoUrl;
+    }
+
+    public boolean isAdmin() {
+        return mIsAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        mIsAdmin = admin;
+    }
 }

@@ -1,21 +1,23 @@
-package com.android.uccapp;
+package com.android.uccapp.model;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
-import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-
-import java.util.Arrays;
-import java.util.List;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class ConfigUtility {
     public static FirebaseDatabase mFirebaseDatabase;
     public static DatabaseReference mFirebaseReference;
+    public static FirebaseStorage mFirebaseStorage;
+    public static StorageReference mFirebaseStorageReference;
     public static FirebaseAuth mFirebaseAuth;
     public static FirebaseAuth.AuthStateListener mFirebaseAuthStateListener;
     public static ConfigUtility mConfigUtility;
@@ -36,6 +38,22 @@ public class ConfigUtility {
             mFirebaseDatabase.setPersistenceEnabled(true);
         }
         mFirebaseReference = mFirebaseDatabase.getReference().child(ref);
+        connectStorage();
         mUser = new User();
+    }
+
+    private static void connectStorage(){
+        mFirebaseStorage = FirebaseStorage.getInstance();
+        mFirebaseStorageReference = mFirebaseStorage.getReference("students_photos");
+    }
+    private void signIn(){
+        mFirebaseAuth.signInWithCustomToken("mycustomtoke").addOnCompleteListener(caller, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()){
+                    Log.d("TAG", "signInWithToken: Success");
+                }
+            }
+        });
     }
 }

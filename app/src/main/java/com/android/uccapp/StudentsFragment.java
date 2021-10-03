@@ -2,13 +2,13 @@ package com.android.uccapp;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -21,28 +21,38 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
 
-import com.google.firebase.database.ChildEventListener;
+import com.android.uccapp.model.ConfigUtility;
+import com.android.uccapp.model.Student;
+import com.android.uccapp.model.User;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.TimeZone;
+import java.util.UUID;
 
 public class StudentsFragment extends Fragment {
+    private static final int REQUEST_PHOTO = 42;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
     private Student mStudent;
@@ -57,15 +67,19 @@ public class StudentsFragment extends Fragment {
     private Spinner mLevelSpinner;
     private Spinner mGenderSpinner;
     private Button mDOBButton;
+    private ImageView mProfileImageView;
     private DatePicker mDOBDatePicker;
     private EditText mEmailEditText;
     private EditText mPhoneEditText;
+    private CheckBox mAdminCheckbox;
+    private ImageButton mImageButton;
     private String[] mGender = new String[]{"Male", "Female"};
     private String[] mLevel = new String[]{"100", "200", "300", "400", "500", "600", "700", "800"};
     private ArrayAdapter<String> mGenderAdapter;
     private ArrayAdapter<String> mLevelAdapter;
     String indexNumber;
     private Toolbar mToolbar;
+    private User mUser;
 
     //Constants
     private final String DIALOGUE_DATE = "DialogDate";
@@ -84,6 +98,7 @@ public class StudentsFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mStudent = new Student();
+        mUser = new User();
         ConfigUtility.createFirebaseUtil("student", getActivity());
         mFirebaseDatabase = ConfigUtility.mFirebaseDatabase;
         mDatabaseReference = ConfigUtility.mFirebaseReference;
@@ -100,6 +115,7 @@ public class StudentsFragment extends Fragment {
         setHasOptionsMenu(true);
         indexNumber = (String) getArguments().getSerializable(ARG_STUDENT_ID);
         mFirstNameEditText = view.findViewById(R.id.etFirstName);
+        mProfileImageView = (ImageView) view.findViewById(R.id.ivStudentImage);
         mFirstNameEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -184,7 +200,7 @@ public class StudentsFragment extends Fragment {
 
             }
         });
-        mIndexNumberEditText = view.findViewById(R.id.etRegistrationNumber);
+        mIndexNumberEditText = view.findViewById(R.id.etAcademicYear);
         mIndexNumberEditText.setText(mStudent.getStudentsId());
         mIndexNumberEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -254,6 +270,14 @@ public class StudentsFragment extends Fragment {
 
             }
         });
+        mAdminCheckbox = (CheckBox) view.findViewById(R.id.cbAdmin);
+        mAdminCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                mUser.setAdmin(b);
+                mStudent.setAdmin(b);
+            }
+        });
         if (indexNumber != null){
             mDatabaseReference.child(indexNumber.replace("/", "_")).addValueEventListener(new ValueEventListener() {
                 @Override
@@ -269,6 +293,8 @@ public class StudentsFragment extends Fragment {
                        mPhoneEditText.setText(mStudent.getPhone());
                        mEmailEditText.setText(mStudent.getEmailAddresss());
                        mDOBButton.setText(mSimpleDateFormat.format(mStudent.getDateOfBirth()));
+                       mAdminCheckbox.setChecked(mStudent.isAdmin());
+                       showImage(mStudent.getPhotoUrl());
                    }
                 }
 
@@ -278,6 +304,16 @@ public class StudentsFragment extends Fragment {
                 }
             });
         }
+        mImageButton = (ImageButton) view.findViewById(R.id.btnUpload);
+        mImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/jpeg");
+                intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
+                startActivityForResult(Intent.createChooser(intent, "Insert Picture"), REQUEST_PHOTO);
+            }
+        });
         return view;
     }
 
@@ -290,6 +326,17 @@ public class StudentsFragment extends Fragment {
             Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             mStudent.setDateOfBirth(date);
             mDOBButton.setText(mStudent.getDateOfBirth().toString());
+        } else if (requestCode == REQUEST_PHOTO){
+            Uri imagePath = data.getData();
+            StorageReference ref = ConfigUtility.mFirebaseStorageReference.child(imagePath.getLastPathSegment());
+            ref.putFile(imagePath).addOnSuccessListener(getActivity(), new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    String imageUrl = taskSnapshot.getDownloadUrl().toString();
+                    Log.d("URL", imageUrl);
+                    mStudent.setPhotoUrl(imageUrl);
+                }
+            });
         }
     }
 
@@ -299,9 +346,33 @@ public class StudentsFragment extends Fragment {
        if (mStudent != null){
            mStudent.setGender(mGenderSpinner.getSelectedItem().toString());
            mStudent.setLevel(mLevelSpinner.getSelectedItem().toString());
-        if (mStudent.getStudentsId() != null){
-            mDatabaseReference.child(mStudent.getStudentsId()).setValue(mStudent);
-        }
+
+            if (mStudent.getStudentsId() != null){
+                mUser.setRegistrationNumber(mStudent.getStudentsId());
+                mUser.setFirstName(mStudent.getFirstName());
+                mUser.setLastName(mStudent.getLastName());
+                ConfigUtility.createFirebaseUtil("users", getActivity());
+                DatabaseReference userRef = ConfigUtility.mFirebaseReference;
+                userRef.child(mIndexNumberEditText.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        mUser  = dataSnapshot.getValue(User.class);
+
+                        if (mUser.getPassword().isEmpty()){
+                            mUser.setPassword(UUID.randomUUID().toString().substring(0, 12));
+                        }
+                        UserFactory.get(getContext()).addUser(mUser);
+                        mDatabaseReference.child(mStudent.getStudentsId()).setValue(mStudent);
+                        UserFactory.get(getContext()).getUserReference("users", getActivity()).child(mUser.getRegistrationNumber()).setValue(mUser);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+            }
        }
     }
 
@@ -322,6 +393,15 @@ public class StudentsFragment extends Fragment {
                 return  true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+    private void showImage(String imagePath){
+        if (imagePath != null && imagePath.isEmpty() == false){
+            Picasso.with(getContext())
+                    .load(imagePath)
+                    .resize(50, 50)
+                    .centerCrop()
+                    .into(mProfileImageView);
         }
     }
 }

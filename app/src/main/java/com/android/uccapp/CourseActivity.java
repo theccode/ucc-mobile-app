@@ -6,16 +6,19 @@ import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
 
 public class CourseActivity extends SuperFragmentActivity  {
-    private static final String EXTRA_COURSE_CODE = "com.android.uccapp.course_code";
-    public static Intent newIntent(Context packageContext, String courseCode){
+    private static final String EXTRA_COURSE_CODE = "com.android.uccapp.courseCode";
+    private static final String EXTRA_USERID = "com.android.uccapp.userId";
+    public static Intent newIntent(Context packageContext, String courseCode, String userId){
         Intent intent = new Intent(packageContext, CourseActivity.class);
         intent.putExtra(EXTRA_COURSE_CODE, courseCode);
+        intent.putExtra(EXTRA_USERID, userId);
         return intent;
     }
     @Override
     protected Fragment createFragment() {
         String courseCode = getIntent().getStringExtra(EXTRA_COURSE_CODE);
-        return  CourseFragment.newInstance(courseCode);
+        String userId = getIntent().getStringExtra(EXTRA_USERID);
+        return  CourseFragment.newInstance(courseCode, userId);
     }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

@@ -45,12 +45,81 @@
        android:layout_marginTop="200dp"
        android:padding="10dp"
        android:gravity="center">
+       <android.support.design.widget.TextInputLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           >
+           <android.support.design.widget.TextInputEditText
+               android:id="@+id/etAcademicYear"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:hint="For: Academic Year"
+               android:ems="10"
+               android:drawableStart="@drawable/credithours"
+               android:drawableLeft="@drawable/credithours"
+               android:drawablePadding="15dp"/>
+       </android.support.design.widget.TextInputLayout>
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="10dp"
+           android:layout_marginBottom="10dp">
+           <TextView
+               android:id="@+id/tvSemester"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Semester:"/>
+
+           <Spinner
+               android:id="@+id/semesterSpinner"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_toEndOf="@+id/tvSemester"
+               android:layout_toRightOf="@+id/tvSemester" />
+       </RelativeLayout>
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"/>
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+           <ImageView
+               android:id="@+id/dobIcon"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="15dp"
+               android:src="@drawable/credithours"/>
+           <TextView
+               android:id="@+id/dobLabel"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="15dp"
+               android:layout_marginLeft="15dp"
+               android:layout_toEndOf="@+id/dobIcon"
+               android:text="Deadline: "
+               android:textColor="@color/colorPrimary"
+               android:textStyle="bold"
+               android:layout_toRightOf="@+id/dobIcon" />
+           <Button
+               android:id="@+id/deadlineButton"
+               android:layout_width="300dp"
+               android:layout_height="wrap_content"
+               android:layout_toEndOf="@id/dobLabel"
+               android:layout_toRightOf="@id/dobLabel"
+               android:background="@color/colorPrimary"
+               android:textColor="@color/colorWhite"/>
+       </RelativeLayout>
+       ≈<LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
        <Button
-           android:id="@+id/btnRegistrationLink"
+           android:id="@+id/btnOpenRegistration"
            android:layout_width="match_parent"
            android:layout_height="58dp"
+           android:layout_marginTop="10dp"
            android:background="@color/colorPrimary"
            android:textColor="@color/colorAcc"
-           android:text="Enable Registration Link"/>
+           android:text="Open Registration"/>
+   </LinearLayout>
    </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

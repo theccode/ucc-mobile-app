@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,6 +17,8 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.support.v7.widget.Toolbar;
 
+import com.android.uccapp.model.ConfigUtility;
+import com.android.uccapp.model.Department;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

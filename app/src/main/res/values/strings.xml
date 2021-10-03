@@ -5,7 +5,7 @@
     <string name="student_s_portal">Student\'s Portal</string>
     <string name="favourited_trending">Favourited Trending</string>
     <string name="graduation">The management of the University of Cape Coast (UCC) has released the graduation list for 2021</string>
-    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_login">UCC Portal</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
