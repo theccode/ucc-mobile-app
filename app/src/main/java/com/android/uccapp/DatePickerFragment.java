@@ -43,7 +43,7 @@ public class DatePickerFragment extends DialogFragment {
         mDatePicker.init(year, month, day, null);
         return new AlertDialog.Builder(getActivity())
                 .setView(v)
-                .setTitle("Date Of Birth")
+                .setTitle("Date")
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {

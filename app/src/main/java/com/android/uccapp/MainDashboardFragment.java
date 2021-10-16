@@ -1,9 +1,11 @@
 package com.android.uccapp;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -19,6 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class MainDashboardFragment extends Fragment {
     private ImageView mAcademicsImageView;
@@ -58,14 +61,13 @@ public class MainDashboardFragment extends Fragment {
         mBottomNavigationView = (BottomNavigationView) view.findViewById(R.id.bottomNavigation);
         mBottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         mAcademicsImageView = (ImageView) view.findViewById(R.id.ivAcademics);
-        mUserNameTextView = (TextView) view.findViewById(R.id.tvUserName);
-        mUserNameTextView.setText(mUser.getFirstName());
+        mUserNameTextView = (TextView) view.findViewById(R.id.tvFirstName);
+        mUserNameTextView.setText("Hi " + mUser.getFirstName() + ", how are you today?");
         mAcademicsImageView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent intent = new Intent(getActivity(), AcademicActivity.class);
+                Intent intent = AcademicActivity.newIntent(getActivity(), mUser.getRegistrationNumber());
                 startActivity(intent);
-//                getActivity().finish();
             }
         });
         mProfileImageView = (ImageView) view.findViewById(R.id.ivProfile);
@@ -74,7 +76,6 @@ public class MainDashboardFragment extends Fragment {
             public void onClick(View view){
                 Intent showStudentsProfile = new Intent(getActivity(), StudentProfileActivity.class);
                 startActivity(showStudentsProfile);
-//                getActivity().finish();
             }
         });
         mRegisterImageView = (ImageView) view.findViewById(R.id.ivRegister);
@@ -95,8 +96,15 @@ public class MainDashboardFragment extends Fragment {
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @RequiresApi(api = Build.VERSION_CODES.KITKAT)
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+            switch (menuItem.getItemId()){
+                case R.id.signout:
+                    Intent intent = new Intent(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                    Objects.requireNonNull(getActivity()).finish();
+            }
             return false;
         }
     };

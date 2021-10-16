@@ -66,7 +66,7 @@ public class StudentProfileFragment extends Fragment {
                 //TODO
             }
         });
-        mProgrammeEditText = (EditText) view.findViewById(R.id.etProgramme);
+        mProgrammeEditText = (EditText) view.findViewById(R.id.etCourse);
         mProgrammeEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

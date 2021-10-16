@@ -70,7 +70,7 @@ public class RegistrationLinkFragment extends Fragment {
         mDeadlineButton = (Button) view.findViewById(R.id.deadlineButton);
         mCourseRegisterationOpening.setDeadline(mDeadlineButton.getText().toString());
         mSemesterSpinner = (Spinner) view.findViewById(R.id.semesterSpinner);
-        mAcademicYearEditText = (EditText) view.findViewById(R.id.etAcademicYear);
+        mAcademicYearEditText = (EditText) view.findViewById(R.id.etStaffId);
         mAcademicYearEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -98,8 +98,9 @@ public class RegistrationLinkFragment extends Fragment {
                         for(DataSnapshot data:dataSnapshot.getChildren()){
                             Course course = (Course) data.getValue(Course.class);
                             course.setIsEnabledForRegistration(true);
+                            mCourseRegisterationOpening.setAcademicYear(mCourseRegisterationOpening.getAcademicYear());
                             mDatabaseReference.child(course.getCourseCode()).child("isEnabledForRegistration").setValue(course.getIsEnabledForRegistration());
-                            DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("course_registration_opening");
+                            DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("courseRegistrationOpening");
                             dbRef.setValue(mCourseRegisterationOpening);
                             if (course.getIsEnabledForRegistration()) mOpenRegistrationButton.setText("CLOSE REGISTRATION");
                         }

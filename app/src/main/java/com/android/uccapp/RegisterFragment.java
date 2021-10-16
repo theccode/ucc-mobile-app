@@ -5,10 +5,6 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.print.PrintAttributes;
@@ -28,10 +24,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.android.uccapp.model.ConfigUtility;
 import com.android.uccapp.model.CourseForRegistration;
-import com.android.uccapp.model.RegisteredCourses;
+import com.android.uccapp.model.GradeBook;
+import com.android.uccapp.model.RegisteredStudents;
 import com.android.uccapp.model.Student;
 import com.android.uccapp.model.User;
 import com.google.firebase.database.DataSnapshot;
@@ -39,7 +36,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
@@ -63,15 +59,12 @@ import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class RegisterFragment extends Fragment {
@@ -85,7 +78,7 @@ public class RegisterFragment extends Fragment {
     private String mUserLevel;
     private Student mStudent;
     private InputStream mInputStream;
-    private RegisteredCourses mRegisteredCourses;
+    private RegisteredStudents mRegisteredStudents;
     private List<CourseForRegistration> mCourseForRegistration;
     private String mDepartmentName;
     private String mDepartmentNameWithoutSpace;
@@ -107,7 +100,7 @@ public class RegisterFragment extends Fragment {
         super.onCreate(savedInstanceState);
         mUser =  (User) getArguments().getSerializable(ARG_USER);
         mUserLevel = null;
-        mRegisteredCourses = new RegisteredCourses();
+        mRegisteredStudents = new RegisteredStudents();
         mCourseForRegistration = new ArrayList<>();
     }
 
@@ -126,8 +119,8 @@ public class RegisterFragment extends Fragment {
         ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         init();
-        handleRegisterButton(mRegisterButton,mTotalCreditTextView);
-        printDocument();
+        handleRegisterButton(mRegisterButton);
+
         return view;
     }
 
@@ -149,7 +142,6 @@ public class RegisterFragment extends Fragment {
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             Student student =  dataSnapshot.getValue(Student.class);
                             mStudent = student;
-//                                    Log.d("STUDENT", student.getLevel());
                             mUserLevel = student.getLevel().split("0")[0];
                         }
 
@@ -165,8 +157,6 @@ public class RegisterFragment extends Fragment {
                             int total = 0;
                             for (DataSnapshot data:dataSnapshot.getChildren()){
                                 CourseForRegistration registrableCourses = (CourseForRegistration) data.getValue(CourseForRegistration.class);
-
-                                Log.d("SPLIT", mUserLevel);
                                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                                 if (registrableCourses.getCourseCode().contains(depCode[1]+mUserLevel)){
                                     String[] creditHours = registrableCourses.getNumOfCreditHours().split(" ");
@@ -221,44 +211,32 @@ public class RegisterFragment extends Fragment {
         Log.d("CODE", depCode[1]);
     }
 
-    private void handleRegisterButton(Button button, final TextView totalCreditTextView){
+    private void handleRegisterButton(final Button button){
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatabaseReference registeredCoursesRef = FirebaseDatabase.getInstance().getReference("registeredCourses");
-                DatabaseReference registeredStudentsRef = FirebaseDatabase.getInstance().getReference("registeredStudents");
-                final RegisteredCourses registeredCourses = new RegisteredCourses();
+                printDocument(button);
+                ConfigUtility.createFirebaseUtil("registeredStudents", getActivity());
+                DatabaseReference registeredStudentsRef = ConfigUtility.mFirebaseReference;
+                ConfigUtility.createFirebaseUtil("studentsGradeBook", getActivity());
+                DatabaseReference studentsGradeBookRef = ConfigUtility.mFirebaseReference;
+                final RegisteredStudents registeredStudent = new RegisteredStudents();
+                final GradeBook gradeBook = new GradeBook();
+                List<HashMap<String, String>> courseCodesAndGrades = new ArrayList<>();
+                HashMap<String, String> courseCodeAndGrade = new HashMap<>();
 
+                List<String> courseCodes = new ArrayList<>();
                 for (int i = 0; i < mCompulsoryCreditHoursLinearLayout.getChildCount(); i++){
                     TextView codeTV = (TextView) mCompulsoryCourseCodeLinearLayout.getChildAt(i);
-                    TextView titleTV = (TextView) mCompulsoryCourseTitleLinearLayout.getChildAt(i);
-                    TextView creditTV = (TextView) mCompulsoryCreditHoursLinearLayout.getChildAt(i);
-
-                    registeredCourses.setCourseTitle(titleTV.getText().toString());
-                    registeredCourses.setCreditHours(creditTV.getText().toString());
-                    registeredCoursesRef.child(mDepartmentNameWithoutSpace).child("Level" + mStudent.getLevel().replaceAll("\\s+", "")).child(mUser.getRegistrationNumber()).child("courses").child(codeTV.getText().toString()).setValue(registeredCourses);
-//                    totalCreditTextView.setText(String.valueOf(total));
-                    registeredCoursesRef.child(mDepartmentNameWithoutSpace).child("Level"+mStudent.getLevel().replaceAll("\\s+", "")).child(mUser.getRegistrationNumber()).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            for (DataSnapshot data: dataSnapshot.getChildren()){
-                                if (data.exists()){
-                                    mRegisterButton.setText("Preview");
-                                    mRegisterButton.setTag("btnPreview");
-
-                                }
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
-                }
-
-//                View
-//                Toast.makeText(getActivity(), "Registration in progress!" + " "+mDepartmentName + " " + mDepartmentNameWithoutSpace +"\n", Toast.LENGTH_LONG).show();
+                    courseCodes.add(codeTV.getText().toString());
+                    registeredStudent.setRegisteredCourseCode(courseCodes);
+                    courseCodeAndGrade.put(codeTV.getText().toString(), "");
+                    registeredStudentsRef.child(mDepartmentNameWithoutSpace).child(mUser.getRegistrationNumber()).setValue(registeredStudent);
+                };
+                courseCodesAndGrades.add(courseCodeAndGrade);
+                gradeBook.setCourseCodesAndGrades(courseCodesAndGrades);
+                gradeBook.setRegistrationNumber(mUser.getRegistrationNumber());
+                studentsGradeBookRef.child(gradeBook.getRegistrationNumber()).setValue(gradeBook);
             }
         });
     }
@@ -334,7 +312,7 @@ public class RegisterFragment extends Fragment {
                      .resize(80, 80)
                      .centerCrop()
                      .into(mProfileImageView);
-             Drawable d  = mProfileImageView.getDrawable();
+           /*  Drawable d  = mProfileImageView.getDrawable();
              BitmapDrawable profBDrawable = (BitmapDrawable) d;
              Bitmap bitmap = profBDrawable.getBitmap();
             InputStream profileImageStream = new FileInputStream(mStudent.getPhotoUrl());
@@ -344,7 +322,7 @@ public class RegisterFragment extends Fragment {
             resizedProfileBmp.compress(Bitmap.CompressFormat.JPEG, 100, profileStream);
             Image profileImageSignature;
             profileImageSignature = Image.getInstance(profileStream.toByteArray());
-            addImageToDocument(document, profileImageSignature, Element.ALIGN_CENTER);
+            addImageToDocument(document, profileImageSignature, Element.ALIGN_CENTER);*/
             document.close();
             printRegistrationDocument(mStudent.getStudentsId());
 
@@ -411,14 +389,14 @@ public class RegisterFragment extends Fragment {
         document.add(paragraph);
     }
 
-    private void printDocument(){
+    private void printDocument(final Button button){
         Dexter.withActivity(getActivity())
                 .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .withListener(new PermissionListener() {
                     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                     @Override
                     public void onPermissionGranted(PermissionGrantedResponse response) {
-                        mRegisterButton.setOnClickListener(new View.OnClickListener() {
+                        button.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 createRegistrationDocument(PathGeneratorObject.getPathName(getActivity()) + mStudent.getStudentsId()+".pdf", mCourseForRegistration);

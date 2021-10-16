@@ -116,7 +116,7 @@
               android:layout_height="wrap_content"
               android:paddingLeft="5dp">
               <android.support.design.widget.TextInputEditText
-                  android:id="@+id/etAcademicYear"
+                  android:id="@+id/etStaffId"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:hint="Registration Number"
@@ -144,7 +144,7 @@
               android:layout_height="wrap_content"
               android:paddingLeft="5dp">
               <android.support.design.widget.TextInputEditText
-                  android:id="@+id/etProgramme"
+                  android:id="@+id/etCourse"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:hint="Programme"
@@ -180,16 +180,16 @@
               android:layout_marginTop="10dp"
               android:layout_marginBottom="10dp">
               <TextView
-                  android:id="@+id/tvSemester"
+                  android:id="@+id/tvCreditHours"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:text="Level:"/>
               <Spinner
                   android:id="@+id/sLevel"
                   android:layout_width="wrap_content"
-                  android:layout_toEndOf="@+id/tvSemester"
+                  android:layout_toEndOf="@+id/tvCreditHours"
                   android:layout_height="wrap_content"
-                  android:layout_toRightOf="@+id/tvSemester" />
+                  android:layout_toRightOf="@+id/tvCreditHours" />
               <TextView
                   android:id="@+id/tvGender"
                   android:layout_width="wrap_content"

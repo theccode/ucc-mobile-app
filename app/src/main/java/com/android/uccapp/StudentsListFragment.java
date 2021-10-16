@@ -69,10 +69,10 @@ public class StudentsListFragment extends Fragment {
             super(inflater.inflate(R.layout.student_list_person, parent, false));
 
             itemView.setOnClickListener(this);
-            mFullNameTextView = (TextView) itemView.findViewById(R.id.tvDepartmentName);
-            mIndexTextView = (TextView) itemView.findViewById(R.id.tvDepartmentCode);
-            mLevelTextView = (TextView) itemView.findViewById(R.id.tvSemester);
-            mProfileImage = (ImageView) itemView.findViewById(R.id.ivProfileImage);
+            mFullNameTextView = (TextView) itemView.findViewById(R.id.tvCourseTitle);
+            mIndexTextView = (TextView) itemView.findViewById(R.id.tvCourseCode);
+            mLevelTextView = (TextView) itemView.findViewById(R.id.tvCreditHours);
+            mProfileImage = (ImageView) itemView.findViewById(R.id.ivCourseIcon);
         }
 
         @Override

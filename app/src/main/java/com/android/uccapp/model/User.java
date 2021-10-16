@@ -12,6 +12,16 @@ public class User implements Serializable {
     private String password;
     private boolean isAdmin;
 
+    public boolean isLecturer() {
+        return isLecturer;
+    }
+
+    public void setLecturer(boolean lecturer) {
+        isLecturer = lecturer;
+    }
+
+    private boolean isLecturer;
+
     public User(){
 //        this(this.getRegistrationNumber());
     }

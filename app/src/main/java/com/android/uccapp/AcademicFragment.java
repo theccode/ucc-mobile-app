@@ -21,16 +21,27 @@ public class AcademicFragment extends Fragment {
     private Toolbar mToolbar;
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
+    private static final String ARG_REGNO = "com.android.uccapp.regno";
+    private String mRegistrationNumber;
+
+    public static AcademicFragment newInstance(String registrationNumber){
+        Bundle args = new Bundle();
+        args.putString(ARG_REGNO, registrationNumber);
+        AcademicFragment academicFragment = new AcademicFragment();
+        academicFragment.setArguments(args);
+        return academicFragment;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mRegistrationNumber = getArguments().getString(ARG_REGNO);
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.academics, container, false);
+        View view = inflater.inflate(R.layout.fragment_academics, container, false);
         mToolbar = (Toolbar) view.findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(mToolbar);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -45,9 +56,8 @@ public class AcademicFragment extends Fragment {
 
     public void setupViewPager(ViewPager viewPager){
          ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
-         adapter.addFragment(new CalendarFragment(), "Calendar");
-         adapter.addFragment(new TimeTableFragment(), "Time Table");
-         adapter.addFragment(new ResultFragment(), "Result");
+         adapter.addFragment( TimeTableFragment.newInstance(mRegistrationNumber), "Time Table");
+         adapter.addFragment(ResultFragment.newInstance(mRegistrationNumber), "Result");
          viewPager.setAdapter(adapter);
     }
 

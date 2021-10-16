@@ -22,43 +22,43 @@
             android:layout_height="wrap_content"
             android:padding="10dp">
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/ivProfileImage"
+                android:id="@+id/ivCourseIcon"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 app:civ_border_width="1dp"
                 app:civ_border_color="#FF233F8F"
                 android:src="@drawable/students" />
             <TextView
-                android:id="@+id/tvDepartmentName"
+                android:id="@+id/tvCourseTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Betty Ablorh"
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold"
                 android:textSize="22dp"
-                android:layout_toEndOf="@id/ivProfileImage"
+                android:layout_toEndOf="@id/ivCourseIcon"
                 android:paddingStart="15dp"
-                android:layout_toRightOf="@id/ivProfileImage"
+                android:layout_toRightOf="@id/ivCourseIcon"
                 android:paddingLeft="15dp" />
             <TextView
-                android:id="@+id/tvDepartmentCode"
+                android:id="@+id/tvCourseCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="PS/CSC/17/0027"
-                android:layout_below="@+id/tvDepartmentName"
-                android:layout_toEndOf="@id/ivProfileImage"
+                android:layout_below="@+id/tvCourseTitle"
+                android:layout_toEndOf="@id/ivCourseIcon"
                 android:paddingStart="15dp"
-                android:layout_toRightOf="@id/ivProfileImage"
+                android:layout_toRightOf="@id/ivCourseIcon"
                 android:paddingLeft="15dp" />
             <TextView
-                android:id="@+id/tvSemester"
+                android:id="@+id/tvCreditHours"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Level: 400"
-                android:layout_below="@+id/tvDepartmentCode"
-                android:layout_toEndOf="@id/ivProfileImage"
+                android:layout_below="@+id/tvCourseCode"
+                android:layout_toEndOf="@id/ivCourseIcon"
                 android:paddingStart="15dp"
-                android:layout_toRightOf="@id/ivProfileImage"
+                android:layout_toRightOf="@id/ivCourseIcon"
                 android:paddingLeft="15dp" />
         </RelativeLayout>
     </LinearLayout>

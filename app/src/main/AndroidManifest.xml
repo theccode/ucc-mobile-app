@@ -1,15 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.android.uccapp">
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:supportsRtl="true"
         android:largeHeap="true"
+        android:supportsRtl="true"
         android:theme="@style/UCCAppMaterialTheme">
-        <activity android:name=".UserListActivity" android:parentActivityName=".AdministratorActivity"/>
+        <activity android:name=".CreateTimetableActivity">
+
+        </activity>
+        <activity android:name=".ResultViewActivity" />
+        <activity
+            android:name=".GradeBookActivity"
+            android:parentActivityName=".RegisteredStudentsListActivity" />
+        <activity
+            android:name=".RegisteredStudentsListActivity"
+            android:launchMode="singleTop"
+            android:parentActivityName=".LecturerDashboardActivity" />
+        <activity
+            android:name=".LecturerDashboardActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".StaffListActivity"
+            android:launchMode="singleTop"
+            android:parentActivityName=".AdministratorActivity" />
+        <activity
+            android:name=".StaffActivity"
+            android:parentActivityName=".StaffListActivity" />
+        <activity
+            android:name=".UserListActivity"
+            android:parentActivityName=".AdministratorActivity" />
         <activity android:name=".UserActivity" />
         <activity
             android:name=".RegistrationLinkActivity"
@@ -39,6 +64,7 @@
             android:name=".StudentsListActivity"
             android:parentActivityName=".AdministratorActivity"
             android:screenOrientation="portrait" />
+        <!-- LAUNCHER -->
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
@@ -50,33 +76,34 @@
             </intent-filter>
         </activity>
         <activity
-            android:launchMode="singleTop"
             android:name=".AdministratorActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
-        <activity
-            android:name=".RegisterActivity"
-            android:parentActivityName=".MainDashboard"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MainDashboard"
+            android:name=".RegisterActivity"
+            android:parentActivityName=".MainDashboardActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainDashboardActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
             android:name=".StudentProfileActivity"
-            android:parentActivityName=".MainDashboard"
+            android:parentActivityName=".MainDashboardActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".AcademicActivity"
-            android:parentActivityName=".MainDashboard"
+            android:parentActivityName=".MainDashboardActivity"
             android:screenOrientation="portrait" />
+
         <provider
+            android:name="android.support.v4.content.FileProvider"
             android:authorities="com.android.uccapp.fileprovider"
             android:exported="false"
-            android:grantUriPermissions="true"
-            android:name="android.support.v4.content.FileProvider">
-            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/provider_paths"/>
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
         </provider>
     </application>
 

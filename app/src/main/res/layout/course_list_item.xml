@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:padding="10dp">
             <ImageView
-                android:id="@+id/ivProfileImage"
+                android:id="@+id/ivCourseIcon"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:src="@drawable/course_icon"/>
@@ -34,9 +34,9 @@
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold"
                 android:textSize="22dp"
-                android:layout_toEndOf="@id/ivProfileImage"
+                android:layout_toEndOf="@id/ivCourseIcon"
                 android:paddingStart="15dp"
-                android:layout_toRightOf="@id/ivProfileImage"
+                android:layout_toRightOf="@id/ivCourseIcon"
                 android:paddingLeft="15dp" />
             <TextView
                 android:id="@+id/tvCourseCode"
@@ -44,9 +44,9 @@
                 android:layout_height="wrap_content"
                 android:text="CSC101"
                 android:layout_below="@+id/tvCourseName"
-                android:layout_toEndOf="@id/ivProfileImage"
+                android:layout_toEndOf="@id/ivCourseIcon"
                 android:paddingStart="15dp"
-                android:layout_toRightOf="@id/ivProfileImage"
+                android:layout_toRightOf="@id/ivCourseIcon"
                 android:paddingLeft="15dp" />
             <TextView
                 android:id="@+id/tvCourseSemester"
@@ -57,7 +57,7 @@
                 android:layout_below="@+id/tvCourseName"
                 android:layout_toEndOf="@id/tvCourseCode"
                 android:paddingStart="15dp"
-                android:layout_toRightOf="@id/ivProfileImage"
+                android:layout_toRightOf="@id/ivCourseIcon"
                 android:paddingLeft="15dp" />
             <TextView
                 android:id="@+id/tvCourseLevel"
@@ -65,9 +65,9 @@
                 android:layout_height="wrap_content"
                 android:text="Level: 100"
                 android:layout_below="@+id/tvCourseCode"
-                android:layout_toEndOf="@id/ivProfileImage"
+                android:layout_toEndOf="@id/ivCourseIcon"
                 android:paddingStart="15dp"
-                android:layout_toRightOf="@id/ivProfileImage"
+                android:layout_toRightOf="@id/ivCourseIcon"
                 android:paddingLeft="15dp" />
         </RelativeLayout>
     </LinearLayout>

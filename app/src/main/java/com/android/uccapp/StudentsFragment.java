@@ -166,7 +166,7 @@ public class StudentsFragment extends Fragment {
 
             }
         });
-        mProgrammeEditText = view.findViewById(R.id.etProgramme);
+        mProgrammeEditText = view.findViewById(R.id.etCourse);
         mProgrammeEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -200,7 +200,7 @@ public class StudentsFragment extends Fragment {
 
             }
         });
-        mIndexNumberEditText = view.findViewById(R.id.etAcademicYear);
+        mIndexNumberEditText = view.findViewById(R.id.etStaffId);
         mIndexNumberEditText.setText(mStudent.getStudentsId());
         mIndexNumberEditText.addTextChangedListener(new TextWatcher() {
             @Override

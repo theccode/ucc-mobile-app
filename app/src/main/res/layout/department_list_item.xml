@@ -22,41 +22,41 @@
             android:layout_height="wrap_content"
             android:padding="10dp">
             <ImageView
-                android:id="@+id/ivProfileImage"
+                android:id="@+id/ivCourseIcon"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:src="@drawable/department_icon"/>
             <TextView
-                android:id="@+id/tvDepartmentName"
+                android:id="@+id/tvCourseTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Department of Computer Science"
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold"
                 android:textSize="22dp"
-                android:layout_toEndOf="@id/ivProfileImage"
+                android:layout_toEndOf="@id/ivCourseIcon"
                 android:paddingStart="15dp"
-                android:layout_toRightOf="@id/ivProfileImage"
+                android:layout_toRightOf="@id/ivCourseIcon"
                 android:paddingLeft="15dp" />
             <TextView
-                android:id="@+id/tvDepartmentCode"
+                android:id="@+id/tvCourseCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Department Code: CSC"
-                android:layout_below="@+id/tvDepartmentName"
-                android:layout_toEndOf="@id/ivProfileImage"
+                android:layout_below="@+id/tvCourseTitle"
+                android:layout_toEndOf="@id/ivCourseIcon"
                 android:paddingStart="15dp"
-                android:layout_toRightOf="@id/ivProfileImage"
+                android:layout_toRightOf="@id/ivCourseIcon"
                 android:paddingLeft="15dp" />
             <TextView
-                android:id="@+id/tvSemester"
+                android:id="@+id/tvCreditHours"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="School of Physical Sciences"
-                android:layout_below="@+id/tvDepartmentCode"
-                android:layout_toEndOf="@id/ivProfileImage"
+                android:layout_below="@+id/tvCourseCode"
+                android:layout_toEndOf="@id/ivCourseIcon"
                 android:paddingStart="15dp"
-                android:layout_toRightOf="@id/ivProfileImage"
+                android:layout_toRightOf="@id/ivCourseIcon"
                 android:paddingLeft="15dp" />
         </RelativeLayout>
     </LinearLayout>

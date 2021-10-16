@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +38,7 @@ public class AdministratorFragment extends Fragment {
     private ImageView mResultsImageView;
     private ImageView mTimetableImageView;
     private ImageView mUsersImageView;
+    private LinearLayout mStaffLinearLayout;
     private Toolbar mToolbar;
     private TextView mFirstNameTextView;
     private static final String ARG_USER = "com.android.uccapp.user";
@@ -137,7 +139,14 @@ public class AdministratorFragment extends Fragment {
 
             }
         });
-
+        mStaffLinearLayout = (LinearLayout) view.findViewById(R.id.staff);
+        mStaffLinearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), StaffListActivity.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 
