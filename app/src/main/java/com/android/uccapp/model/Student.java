@@ -17,6 +17,9 @@ public class Student {
     private String mLevel;
     private String mPhone;
     private String mEmailAddress;
+    private String mHallOfResidence;
+    private String mRoomNumber;
+    private String mCurrentResidenceAddress;
     private boolean mIsAdmin;
 
     public Student() {
@@ -36,6 +39,38 @@ public class Student {
         mEmailAddress = emailAddress;
         mPhotoUrl = photoUrl;
         mIsAdmin = isAdmin;
+    }
+
+    public String getEmailAddress() {
+        return mEmailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        mEmailAddress = emailAddress;
+    }
+
+    public String getHallOfResidence() {
+        return mHallOfResidence;
+    }
+
+    public void setHallOfResidence(String hallOfResidence) {
+        mHallOfResidence = hallOfResidence;
+    }
+
+    public String getRoomNumber() {
+        return mRoomNumber;
+    }
+
+    public void setRoomNumber(String roomNumber) {
+        mRoomNumber = roomNumber;
+    }
+
+    public String getCurrentResidenceAddress() {
+        return mCurrentResidenceAddress;
+    }
+
+    public void setCurrentResidenceAddress(String currentResidenceAddress) {
+        mCurrentResidenceAddress = currentResidenceAddress;
     }
 
     public String getStudentsId() {

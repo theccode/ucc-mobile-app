@@ -1,6 +1,5 @@
 package com.android.uccapp;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.uccapp.model.ConfigUtility;
 import com.android.uccapp.model.Department;
@@ -31,10 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 public class RegisteredStudentsListFragment extends Fragment {
     private Toolbar mToolbar;
@@ -83,9 +78,9 @@ public class RegisteredStudentsListFragment extends Fragment {
 
         public StudentsGradeHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.fragment_courses_result_list_item, parent, false));
-            mCourseTitleTextView = (TextView) itemView.findViewById(R.id.tvCourseTitle);
-            mCourseCodeTextView = (TextView) itemView.findViewById(R.id.tvCourseCode);
-            mCoursesCreditHours = (TextView) itemView.findViewById(R.id.tvCreditHours);
+            mCourseTitleTextView = (TextView) itemView.findViewById(R.id.tvProgram);
+            mCourseCodeTextView = (TextView) itemView.findViewById(R.id.tvFeeAmount);
+            mCoursesCreditHours = (TextView) itemView.findViewById(R.id.tvLevel);
             itemView.setOnClickListener(this);
         }
 

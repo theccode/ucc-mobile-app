@@ -9,6 +9,8 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -39,6 +41,7 @@ import java.util.Objects;
 
 public class CreateTimeTableFragment extends Fragment {
     private Spinner mDepartmentSpinner;
+    private Toolbar mToolbar;
     private Spinner mLevelSpinner;
     private Spinner mCourseCodeSpinner;
     private EditText mCourseNameEditText;
@@ -71,6 +74,9 @@ public class CreateTimeTableFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view  = inflater.inflate(R.layout.fragment_create_time_table, container, false);
+        mToolbar = (android.support.v7.widget.Toolbar) view.findViewById(R.id.toolbar);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(mToolbar);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mDepartmentSpinner = (Spinner) view.findViewById(R.id.spDepartmentName);
         mLevelTextView = (TextView) view.findViewById(R.id.tvLevel);
         mCourseNameEditText = (EditText) view.findViewById(R.id.etCourseName);
@@ -216,12 +222,12 @@ public class CreateTimeTableFragment extends Fragment {
         mVenueEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                mTimeTable.setVenue(charSequence.toString());
+
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+                mTimeTable.setVenue(charSequence.toString());
             }
 
             @Override

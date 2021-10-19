@@ -11,6 +11,15 @@ public class Staff implements Serializable {
     private String mPhoneNumber;
     private boolean mIsAdmin;
     private boolean mIsLecturer;
+    private boolean mIsFinancier;
+
+    public boolean isFinancier() {
+        return mIsFinancier;
+    }
+
+    public void setFinancier(boolean financier) {
+        mIsFinancier = financier;
+    }
 
     public Staff() {
     }

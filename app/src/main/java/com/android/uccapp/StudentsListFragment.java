@@ -69,9 +69,9 @@ public class StudentsListFragment extends Fragment {
             super(inflater.inflate(R.layout.student_list_person, parent, false));
 
             itemView.setOnClickListener(this);
-            mFullNameTextView = (TextView) itemView.findViewById(R.id.tvCourseTitle);
-            mIndexTextView = (TextView) itemView.findViewById(R.id.tvCourseCode);
-            mLevelTextView = (TextView) itemView.findViewById(R.id.tvCreditHours);
+            mFullNameTextView = (TextView) itemView.findViewById(R.id.tvProgram);
+            mIndexTextView = (TextView) itemView.findViewById(R.id.tvFeeAmount);
+            mLevelTextView = (TextView) itemView.findViewById(R.id.tvLevel);
             mProfileImage = (ImageView) itemView.findViewById(R.id.ivCourseIcon);
         }
 
@@ -83,10 +83,12 @@ public class StudentsListFragment extends Fragment {
         }
         public  void bind(Student student){
             mStudent = student;
-            mFullNameTextView.setText(mStudent.getFirstName() + " " + mStudent.getLastName());
-            mIndexTextView.setText(mStudent.getStudentsId().replace("_", "/")); //fix to be done later
-            mLevelTextView.setText(mStudent.getLevel());
-            showImage(mStudent.getPhotoUrl());
+            if (mStudent != null){
+                mFullNameTextView.setText(mStudent.getFirstName() + " " + mStudent.getLastName());
+                mIndexTextView.setText(mStudent.getStudentsId().replace("_", "/")); //fix to be done later
+                mLevelTextView.setText(mStudent.getLevel());
+                showImage(mStudent.getPhotoUrl());
+            }
         }
         private void showImage(String imagePath){
             if (imagePath != null && imagePath.isEmpty() == false){

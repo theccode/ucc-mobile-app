@@ -42,6 +42,7 @@ public class StaffFragment extends Fragment {
     private ImageButton mStaffImageUploadButton;
     private CheckBox mAdminCheckBox;
     private CheckBox mLecturerCheckBox;
+    private CheckBox mFinancierCheckBox;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
     private Staff mStaff;
@@ -190,6 +191,13 @@ public class StaffFragment extends Fragment {
                 mStaff.setLecturer(b);
             }
         });
+        mFinancierCheckBox = (CheckBox) view.findViewById(R.id.cbFinancier);
+        mFinancierCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                mStaff.setFinancier(b);
+            }
+        });
         return view;
     }
 
@@ -199,11 +207,9 @@ public class StaffFragment extends Fragment {
         if (mStaff != null){
             if (mStaff.getStaffId() != null){
                 if (mStaff.getStaffId() != null){
-
                     ConfigUtility.createFirebaseUtil("users", getActivity());
                     DatabaseReference usersDatabaseRef = ConfigUtility.mFirebaseReference;
                     usersDatabaseRef.child(mStaffID.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
-                        //                     User user = new User();
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             mUser = dataSnapshot.getValue(User.class);
@@ -216,6 +222,7 @@ public class StaffFragment extends Fragment {
                             mUser.setFirstName(mStaff.getFirstName());
                             mUser.setLastName(mStaff.getLastName());
                             mUser.setLecturer(mStaff.isLecturer());
+                            mUser.setFinancier(mStaff.isFinancier());
                             UserFactory.get(getContext()).getUserReference("users", getActivity()).child(mStaff.getStaffId().replace("/", "_")).setValue(mUser);
                         }
                         @Override

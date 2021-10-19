@@ -70,9 +70,9 @@ public class DepartmentListFragment extends Fragment {
 
        public DepartmentHolder(LayoutInflater inflater, ViewGroup parent){
            super(inflater.inflate(R.layout.department_list_item, parent, false));
-           mDepartmentNameTextView = (TextView) itemView.findViewById(R.id.tvCourseTitle);
-           mDepartmentCodeTextView = (TextView) itemView.findViewById(R.id.tvCourseCode);
-           mCollegeOrSchool = (TextView) itemView.findViewById(R.id.tvCreditHours);
+           mDepartmentNameTextView = (TextView) itemView.findViewById(R.id.tvProgram);
+           mDepartmentCodeTextView = (TextView) itemView.findViewById(R.id.tvFeeAmount);
+           mCollegeOrSchool = (TextView) itemView.findViewById(R.id.tvLevel);
            itemView.setOnClickListener(this);
        }
 

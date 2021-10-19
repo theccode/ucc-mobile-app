@@ -180,16 +180,16 @@
               android:layout_marginTop="10dp"
               android:layout_marginBottom="10dp">
               <TextView
-                  android:id="@+id/tvCreditHours"
+                  android:id="@+id/tvLevel"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:text="Level:"/>
               <Spinner
                   android:id="@+id/sLevel"
                   android:layout_width="wrap_content"
-                  android:layout_toEndOf="@+id/tvCreditHours"
+                  android:layout_toEndOf="@+id/tvLevel"
                   android:layout_height="wrap_content"
-                  android:layout_toRightOf="@+id/tvCreditHours" />
+                  android:layout_toRightOf="@+id/tvLevel" />
               <TextView
                   android:id="@+id/tvGender"
                   android:layout_width="wrap_content"
@@ -241,6 +241,48 @@
               android:background="@color/colorPrimary"
               android:textColor="@color/colorWhite"
               android:layout_marginTop="10dp"/>
+          <android.support.design.widget.TextInputLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:paddingLeft="5dp">
+              <android.support.design.widget.TextInputEditText
+                  android:id="@+id/etHallOfResidence"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:drawableStart="@drawable/residence"
+                  android:drawableLeft="@drawable/residence"
+                  android:drawablePadding="15dp"
+                  android:ems="10"
+                  android:hint="Hall of Residence" />
+          </android.support.design.widget.TextInputLayout>
+          <android.support.design.widget.TextInputLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:paddingLeft="5dp">
+              <android.support.design.widget.TextInputEditText
+                  android:id="@+id/etRoomNumber"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:drawableStart="@drawable/key"
+                  android:drawableLeft="@drawable/key"
+                  android:drawablePadding="15dp"
+                  android:ems="10"
+                  android:hint="Room Number" />
+          </android.support.design.widget.TextInputLayout>
+      <android.support.design.widget.TextInputLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:paddingLeft="5dp">
+          <android.support.design.widget.TextInputEditText
+              android:id="@+id/etCurrentResidenceAddress"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:drawableStart="@drawable/residence"
+              android:drawableLeft="@drawable/residence"
+              android:drawablePadding="15dp"
+              android:ems="10"
+              android:hint="Address (Non-resident)" />
+      </android.support.design.widget.TextInputLayout>
           <android.support.design.widget.TextInputLayout
               android:layout_width="match_parent"
               android:layout_height="wrap_content"

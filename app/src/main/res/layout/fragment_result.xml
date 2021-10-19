@@ -7,9 +7,9 @@
         android:id="@+id/tableLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
+        android:layout_marginTop="5dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp">
         <TableRow android:padding="5dp" android:background="@color/colorPrimary" >
             <TextView
                 android:layout_width="wrap_content"

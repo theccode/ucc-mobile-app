@@ -1,148 +1,261 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
+<android.support.design.widget.CoordinatorLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:fitsSystemWindows="true"
+        app:layout_constraintTop_toTopOf="parent"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleMarginEnd="64dp"
+            app:expandedTitleMarginStart="48dp"
+            app:expandedTitleTextAppearance="@android:color/transparent"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            <ImageView
+                android:id="@+id/backgroundPrevMeasure"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_collapseMode="parallax"
+                android:fitsSystemWindows="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/ucc" />
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                />
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+    <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp">
-        <TextView
-            style="?android:listSeparatorTextViewStyle"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Student's Details"
-            android:textColor="@color/colorWhite"
-            android:background="@color/colorPrimary"/>
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:paddingTop="16dp">
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/etFullName"
+            android:orientation="vertical"
+            android:padding="20dp">
+            <TextView
+                style="?android:listSeparatorTextViewStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:autofillHints=""
-                android:ems="10"
-                android:drawableStart="@drawable/ic_baseline_person"
-                android:hint="Student's Full Name"
-                android:inputType="textWebEditText"
-                android:tag="name"
-                android:drawableLeft="@drawable/ic_person" />
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:paddingTop="16dp">
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/etCourse"
+                android:text="Student's Details"
+                android:textColor="@color/colorWhite"
+                android:background="@color/colorPrimary"/>
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:autofillHints=""
-                android:ems="10"
-                android:hint="Programme"
-                android:inputType="textWebEditText"
-                android:tag="name"/>
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:paddingTop="16dp">
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/etMajor"
+                android:paddingTop="16dp">
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/etFullName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:drawableStart="@drawable/ic_baseline_person"
+                    android:drawablePadding="10dp"
+                    android:hint="Student's Full Name"
+                    android:inputType="textWebEditText"
+                    android:tag="name"
+                    android:drawableLeft="@drawable/ic_person" />
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:autofillHints=""
-                android:ems="10"
-                android:hint="Major"
-                android:inputType="textWebEditText"
-                android:tag="name"/>
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:paddingTop="16dp">
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/etGender"
+                android:paddingTop="16dp">
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/etCourse"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:autofillHints=""
+                    android:drawableStart="@drawable/courses"
+                    android:drawablePadding="10dp"
+                    android:ems="10"
+                    android:hint="Programme"
+                    android:inputType="textWebEditText"
+                    android:tag="name"
+                    android:drawableLeft="@drawable/courses" />
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:autofillHints=""
-                android:ems="10"
-                android:hint="Gender"
-                android:inputType="textWebEditText"
-                android:tag="name"/>
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:paddingTop="16dp">
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/etDateOfBirth"
+                android:paddingTop="16dp">
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/etMajor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:autofillHints=""
+                    android:drawableStart="@drawable/major"
+                    android:drawablePadding="10dp"
+                    android:ems="10"
+                    android:hint="Major"
+                    android:inputType="textWebEditText"
+                    android:tag="name"
+                    android:drawableLeft="@drawable/major" />
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:autofillHints=""
-                android:ems="10"
-                android:hint="Date of Birth"
-                android:inputType="textWebEditText"
-                android:tag="name"/>
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:paddingTop="16dp">
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/etLevel"
+                android:paddingTop="16dp">
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/etGender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:autofillHints=""
+                    android:drawableStart="@drawable/gender"
+                    android:drawablePadding="10dp"
+                    android:ems="10"
+                    android:hint="Gender"
+                    android:inputType="textWebEditText"
+                    android:tag="name"
+                    android:drawableLeft="@drawable/gender" />
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:autofillHints=""
-                android:ems="10"
-                android:hint="Level"
-                android:inputType="numberDecimal"
-                android:tag="name"/>
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:paddingTop="16dp">
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/etEmailAddress"
+                android:paddingTop="16dp">
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/etDateOfBirth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:autofillHints=""
+                    android:drawableLeft="@drawable/dob"
+                    android:drawablePadding="10dp"
+                    android:ems="10"
+                    android:hint="Date of Birth"
+                    android:inputType="textWebEditText"
+                    android:tag="name"/>
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:autofillHints=""
-                android:ems="10"
-                android:hint="Email Address"
-                android:inputType="textWebEditText"
-                android:tag="name"/>
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:paddingTop="16dp">
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/etPhone"
+                android:paddingTop="16dp">
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/etLevel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:autofillHints=""
+                    android:drawableLeft="@drawable/level"
+                    android:drawablePadding="10dp"
+                    android:ems="10"
+                    android:hint="Level"
+                    android:inputType="textWebEditText"
+                    android:tag="name"/>
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:autofillHints=""
-                android:ems="10"
-                android:hint="Phone"
-                android:inputType="textWebEditText"
-                android:tag="name"/>
-        </android.support.design.widget.TextInputLayout>
-    </LinearLayout>
-</android.support.v4.widget.NestedScrollView>
+                android:paddingTop="16dp">
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/etHallOfResidence"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:autofillHints=""
+                    android:drawableLeft="@drawable/residence"
+                    android:drawablePadding="10dp"
+                    android:ems="10"
+                    android:hint="Hall of Residence"
+                    android:tag="name"/>
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingTop="16dp">
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/etRoomNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:autofillHints=""
+                    android:drawableLeft="@drawable/key"
+                    android:drawablePadding="10dp"
+                    android:ems="10"
+                    android:hint="Room No."
+                    android:inputType="textWebEditText"
+                    android:tag="name"/>
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingTop="16dp">
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/etCurrentResidenceAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:autofillHints=""
+                    android:drawableLeft="@drawable/ic_home"
+                    android:drawablePadding="10dp"
+                    android:ems="10"
+                    android:hint="Address (Non-residents)"
+                    android:inputType="textWebEditText"
+                    android:tag="name"/>
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingTop="16dp">
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/etEmailAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:autofillHints=""
+                    android:drawableLeft="@drawable/ic_email"
+                    android:drawablePadding="10dp"
+                    android:ems="10"
+                    android:hint="Email Address"
+                    android:inputType="textWebEditText"
+                    android:tag="name"/>
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingTop="16dp"
+                android:layout_marginBottom="50dp">
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/etPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:autofillHints=""
+                    android:drawableLeft="@drawable/ic_android_phone"
+                    android:drawablePadding="10dp"
+                    android:ems="10"
+                    android:hint="Phone"
+                    android:inputType="textWebEditText"
+                    android:tag="name"/>
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.design.widget.CoordinatorLayout>

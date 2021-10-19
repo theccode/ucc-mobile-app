@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -11,9 +12,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.support.v7.widget.Toolbar;
 
 import com.android.uccapp.model.ConfigUtility;
 import com.android.uccapp.model.Student;
+import com.android.uccapp.model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,20 +37,36 @@ public class StudentProfileFragment extends Fragment {
     private EditText mEmailAdressEditText;
     private EditText mPhoneEditText;
     private Student mStudent;
+    private User mUser;
+    Toolbar mToolbar;
+    private static final String ARG_USER = "com.android.uccapp.user";
+
+    public static StudentProfileFragment newInstance(User user){
+        Bundle arg = new Bundle();
+        StudentProfileFragment studentProfileFragment = new StudentProfileFragment();
+        studentProfileFragment.setArguments(arg);
+        return studentProfileFragment;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        ConfigUtility.createFirebaseUtil("student", getActivity());
+        mFirebaseDatabase = ConfigUtility.mFirebaseDatabase;
+        mDatabaseReference = ConfigUtility.mFirebaseReference;
+        mUser = (User) getArguments().getSerializable(ARG_USER);
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_student_profile, container, false);
-        ConfigUtility.createFirebaseUtil("students", getActivity());
-        mFirebaseDatabase = ConfigUtility.mFirebaseDatabase;
-        mDatabaseReference = ConfigUtility.mFirebaseReference;
+        mToolbar = (android.support.v7.widget.Toolbar) view.findViewById(R.id.toolbar);
+        if (mUser != null){
+            mToolbar.setTitle(mUser.getRegistrationNumber().replace("_", "/"));
+        }
+        ((AppCompatActivity)getActivity()).setSupportActionBar(mToolbar);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mStudent = ConfigUtility.mStudent;
         mFullNameEditText = (EditText) view.findViewById(R.id.etFullName);
         mFullNameEditText.addTextChangedListener(new TextWatcher() {
@@ -170,23 +189,26 @@ public class StudentProfileFragment extends Fragment {
 
             }
         });
+
         return view;
     }
 
     @Override
     public void onPause() {
         super.onPause();
-//        mDatabaseReference.setValue(mStudent);
+        if (mStudent != null){
+            mDatabaseReference.child(mUser.getRegistrationNumber()).setValue(mStudent);
+        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mDatabaseReference.addValueEventListener(new ValueEventListener() {
+        mDatabaseReference.child(mUser.getRegistrationNumber()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Student student = dataSnapshot.getValue(Student.class);
-//                mFullNameEditText.setText(student.getStudentsName());
+                mFullNameEditText.setText(student.getFirstName() + student.getLastName());
                 mProgrammeEditText.setText(student.getProgramme());
                 mMajorEditText.setText(student.getMajor());
                 mLevelEditText.setText(student.getLevel());
@@ -201,6 +223,5 @@ public class StudentProfileFragment extends Fragment {
 
             }
         });
-        Log.d("Worked", "Working!");
     }
 }

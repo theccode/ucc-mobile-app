@@ -85,7 +85,7 @@ public class CoursesListFragment extends Fragment {
         public CourseHolder(LayoutInflater layoutInflater, ViewGroup parent){
             super(layoutInflater.inflate(R.layout.course_list_item, parent, false));
             mCourseTitleTextView = (TextView) itemView.findViewById(R.id.tvCourseName);
-            mCourseCodeTextView = (TextView) itemView.findViewById(R.id.tvCourseCode);
+            mCourseCodeTextView = (TextView) itemView.findViewById(R.id.tvFeeAmount);
             mLevelTextView = (TextView) itemView.findViewById(R.id.tvCourseLevel);
             mSemesterTextView = (TextView) itemView.findViewById(R.id.tvCourseSemester);
             itemView.setOnClickListener(this);

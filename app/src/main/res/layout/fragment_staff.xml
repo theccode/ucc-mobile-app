@@ -207,6 +207,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Lecturer"/>
+            <CheckBox
+                android:id="@+id/cbFinancier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Financier"/>
         </LinearLayout>
     </RelativeLayout>
 </android.support.v4.widget.NestedScrollView>

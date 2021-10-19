@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,31 +90,37 @@ public class TimeTableFragment extends Fragment {
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     for (DataSnapshot data:dataSnapshot.getChildren()){
                                         mTableLayout = view.findViewById(R.id.tableLayout);
-                                        mTableRow = new TableRow(getActivity());
-
+                                        TimeTable timeTable = data.getValue(TimeTable.class);
+                                        mTableRow = new TableRow(getContext());
                                         TableLayout.LayoutParams layoutParams = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT, 1.0f);
                                         layoutParams.setMargins(1, 1, 1, 1);
                                         TableRow.LayoutParams tvLayoutParams = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1.0f);
-                                        tvLayoutParams.setMargins(2, 0, 2, 0);
+                                        tvLayoutParams.setMargins(1, 0, 1, 0);
+                                        tvLayoutParams.weight = 1.0f;
                                         String tvColor = "#233F8F";
+                                        float tvSize = 10.5f;
                                         mTableRow.setLayoutParams(layoutParams);
                                         mTableRow.setBackgroundColor(Color.parseColor("#c8e8ff"));
-                                        mCourseCodeTextView = new TextView(getActivity());
-                                        mCourseCodeTextView.setLayoutParams(tvLayoutParams);
+                                        mCourseCodeTextView = new TextView(getContext());
+                                        mCourseCodeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, tvSize);
                                         mCourseCodeTextView.setTextColor(Color.parseColor(tvColor));
-                                        mCourseTitleTextView = new TextView(getActivity());
-                                        mCourseTitleTextView.setLayoutParams(tvLayoutParams);
+                                        mCourseCodeTextView.setLayoutParams(tvLayoutParams);
+                                        mCourseTitleTextView = new TextView(getContext());
+                                        mCourseTitleTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, tvSize);
                                         mCourseTitleTextView.setTextColor(Color.parseColor(tvColor));
-                                        mDateTextView = new TextView(getActivity());
+                                        mCourseTitleTextView.setLayoutParams(tvLayoutParams);
+                                        mDateTextView = new TextView(getContext());
+                                        mDateTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, tvSize);
                                         mDateTextView.setLayoutParams(tvLayoutParams);
                                         mDateTextView.setTextColor(Color.parseColor(tvColor));
-                                        mTimeTextView = new TextView(getActivity());
-                                        mTimeTextView.setLayoutParams(tvLayoutParams);
+                                        mTimeTextView = new TextView(getContext());
+                                        mTimeTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, tvSize);
                                         mTimeTextView.setTextColor(Color.parseColor(tvColor));
-                                        mVenueTextView = new TextView(getActivity());
-                                        mVenueTextView.setLayoutParams(tvLayoutParams);
+                                        mTimeTextView.setLayoutParams(tvLayoutParams);
+                                        mVenueTextView = new TextView(getContext());
+                                        mVenueTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, tvSize);
                                         mVenueTextView.setTextColor(Color.parseColor(tvColor));
-                                        TimeTable timeTable = data.getValue(TimeTable.class);
+                                        mVenueTextView.setLayoutParams(tvLayoutParams);
                                         mCourseCodeTextView.setText(timeTable.getCourseCode());
                                         mCourseTitleTextView.setText(timeTable.getCourseName());
                                         mDateTextView.setText(mSimpleDateFormat.format(timeTable.getExamDate()));
@@ -126,6 +133,7 @@ public class TimeTableFragment extends Fragment {
                                         mTableRow.addView(mVenueTextView);
                                         mTableLayout.addView(mTableRow);
                                     }
+
 
                                 }
 

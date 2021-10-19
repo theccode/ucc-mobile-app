@@ -67,9 +67,9 @@ public class StaffListFragment extends Fragment {
         public StaffHolder(LayoutInflater inflater, ViewGroup parent){
             super(inflater.inflate(R.layout.fragment_staff_list_person, parent, false));
             mImageView = (ImageView) itemView.findViewById(R.id.ivCourseIcon);
-            mFullNameTextView = (TextView) itemView.findViewById(R.id.tvCourseTitle);
-            mStaffIdTextView = (TextView) itemView.findViewById(R.id.tvCourseCode);
-            mStaffsRole = (TextView) itemView.findViewById(R.id.tvCreditHours);
+            mFullNameTextView = (TextView) itemView.findViewById(R.id.tvProgram);
+            mStaffIdTextView = (TextView) itemView.findViewById(R.id.tvFeeAmount);
+            mStaffsRole = (TextView) itemView.findViewById(R.id.tvLevel);
             itemView.setOnClickListener(this);
         }
 

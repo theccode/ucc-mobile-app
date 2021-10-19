@@ -39,7 +39,7 @@
                 android:layout_toRightOf="@id/ivCourseIcon"
                 android:paddingLeft="15dp" />
             <TextView
-                android:id="@+id/tvCourseCode"
+                android:id="@+id/tvFeeAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="CSC101"
@@ -55,7 +55,7 @@
                 android:text="Semester No"
                 android:textColor="@color/colorPrimary"
                 android:layout_below="@+id/tvCourseName"
-                android:layout_toEndOf="@id/tvCourseCode"
+                android:layout_toEndOf="@id/tvFeeAmount"
                 android:paddingStart="15dp"
                 android:layout_toRightOf="@id/ivCourseIcon"
                 android:paddingLeft="15dp" />
@@ -64,7 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Level: 100"
-                android:layout_below="@+id/tvCourseCode"
+                android:layout_below="@+id/tvFeeAmount"
                 android:layout_toEndOf="@id/ivCourseIcon"
                 android:paddingStart="15dp"
                 android:layout_toRightOf="@id/ivCourseIcon"

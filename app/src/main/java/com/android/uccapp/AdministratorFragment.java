@@ -1,16 +1,24 @@
 package com.android.uccapp;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -28,6 +36,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.Objects;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AdministratorFragment extends Fragment {
@@ -41,11 +51,15 @@ public class AdministratorFragment extends Fragment {
     private LinearLayout mStaffLinearLayout;
     private Toolbar mToolbar;
     private TextView mFirstNameTextView;
+    private BottomNavigationView mBottomNavigationView;
     private static final String ARG_USER = "com.android.uccapp.user";
     private CircleImageView mProfileCircleImageView;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
     private User mUser;
+    private CountDownTimer mCountDownTimer;
+    private ProgressDialog mProgressDialog;
+    private int i = 0;
 
     public static AdministratorFragment newInstance(User user){
         Bundle bundle = new Bundle();
@@ -61,6 +75,12 @@ public class AdministratorFragment extends Fragment {
         ConfigUtility.createFirebaseUtil("student", getActivity());
         mFirebaseDatabase = ConfigUtility.mFirebaseDatabase;
         mDatabaseReference = ConfigUtility.mFirebaseReference;
+        mProgressDialog = new ProgressDialog(getContext());
+        mProgressDialog.setMessage("Thanks for your patronage, Bye!...");
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setProgress(i);
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mProgressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.GRAY));
     }
 
     @Nullable
@@ -69,6 +89,8 @@ public class AdministratorFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_administrator, container, false);
         mToolbar = (Toolbar) view.findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(mToolbar);
+        mBottomNavigationView = (BottomNavigationView) view.findViewById(R.id.bottomNavigation);
+        mBottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         mStudentImageView = view.findViewById(R.id.ivStudentsButton);
         mStudentImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,6 +134,8 @@ public class AdministratorFragment extends Fragment {
         mTimetableImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), CreateTimetableActivity.class);
+                startActivity(intent);
                 Toast.makeText(getActivity(), "TimeTable //TODO", Toast.LENGTH_LONG).show();
             }
         });
@@ -148,6 +172,45 @@ public class AdministratorFragment extends Fragment {
             }
         });
         return view;
+    }
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+            switch (menuItem.getItemId()){
+                case R.id.signout:
+                    Intent intent = new Intent(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                    Objects.requireNonNull(getActivity()).finish();
+                    if (mProgressDialog != null){
+                        mProgressDialog.show();
+                    }
+                    mCountDownTimer = new CountDownTimer(2000, 1000) {
+                        @Override
+                        public void onTick(long l) {
+
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            if (mProgressDialog != null){
+                                mProgressDialog.dismiss();
+                                mProgressDialog = null;
+                            }
+                        }
+                    }.start();
+            }
+            return false;
+        }
+    };
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mProgressDialog != null){
+            mProgressDialog.dismiss();
+            mProgressDialog = null;
+        }
     }
 
 }

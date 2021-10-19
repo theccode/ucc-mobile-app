@@ -27,7 +27,7 @@
                 android:layout_height="80dp"
                 android:src="@drawable/course_icon"/>
             <TextView
-                android:id="@+id/tvCourseTitle"
+                android:id="@+id/tvProgram"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Course Name"
@@ -39,21 +39,21 @@
                 android:layout_toRightOf="@id/ivCourseIcon"
                 android:paddingLeft="15dp" />
             <TextView
-                android:id="@+id/tvCourseCode"
+                android:id="@+id/tvFeeAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Course Code"
-                android:layout_below="@+id/tvCourseTitle"
+                android:layout_below="@+id/tvProgram"
                 android:layout_toEndOf="@id/ivCourseIcon"
                 android:paddingStart="15dp"
                 android:layout_toRightOf="@id/ivCourseIcon"
                 android:paddingLeft="15dp" />
             <TextView
-                android:id="@+id/tvCreditHours"
+                android:id="@+id/tvLevel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Credit Hours"
-                android:layout_below="@+id/tvCourseCode"
+                android:layout_below="@+id/tvFeeAmount"
                 android:layout_toEndOf="@id/ivCourseIcon"
                 android:paddingStart="15dp"
                 android:layout_toRightOf="@id/ivCourseIcon"

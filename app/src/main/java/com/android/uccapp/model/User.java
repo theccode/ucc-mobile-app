@@ -1,7 +1,6 @@
 package com.android.uccapp.model;
 
 import java.io.Serializable;
-import java.util.Map;
 import java.util.UUID;
 
 public class User implements Serializable {
@@ -11,6 +10,16 @@ public class User implements Serializable {
     private String lastName;
     private String password;
     private boolean isAdmin;
+    private boolean isLecturer;
+    private boolean isFinancier;
+
+    public boolean isFinancier() {
+        return isFinancier;
+    }
+
+    public void setFinancier(boolean financier) {
+        isFinancier = financier;
+    }
 
     public boolean isLecturer() {
         return isLecturer;
@@ -20,7 +29,6 @@ public class User implements Serializable {
         isLecturer = lecturer;
     }
 
-    private boolean isLecturer;
 
     public User(){
 //        this(this.getRegistrationNumber());

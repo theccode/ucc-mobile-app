@@ -73,6 +73,9 @@ public class StudentsFragment extends Fragment {
     private EditText mPhoneEditText;
     private CheckBox mAdminCheckbox;
     private ImageButton mImageButton;
+    private EditText mHallOfResidenceEditText;
+    private EditText mRoomNumberEditText;
+    private EditText mCurrentPlaceOfResidenceEditText;
     private String[] mGender = new String[]{"Male", "Female"};
     private String[] mLevel = new String[]{"100", "200", "300", "400", "500", "600", "700", "800"};
     private ArrayAdapter<String> mGenderAdapter;
@@ -278,6 +281,57 @@ public class StudentsFragment extends Fragment {
                 mStudent.setAdmin(b);
             }
         });
+        mHallOfResidenceEditText = (EditText) view.findViewById(R.id.etHallOfResidence);
+        mHallOfResidenceEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    mStudent.setHallOfResidence(charSequence.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        mRoomNumberEditText = (EditText) view.findViewById(R.id.etRoomNumber);
+        mRoomNumberEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                mStudent.setRoomNumber(charSequence.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        mCurrentPlaceOfResidenceEditText = (EditText) view.findViewById(R.id.etCurrentResidenceAddress);
+        mCurrentPlaceOfResidenceEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                mStudent.setCurrentResidenceAddress(charSequence.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         if (indexNumber != null){
             mDatabaseReference.child(indexNumber.replace("/", "_")).addValueEventListener(new ValueEventListener() {
                 @Override
@@ -294,6 +348,11 @@ public class StudentsFragment extends Fragment {
                        mEmailEditText.setText(mStudent.getEmailAddresss());
                        mDOBButton.setText(mSimpleDateFormat.format(mStudent.getDateOfBirth()));
                        mAdminCheckbox.setChecked(mStudent.isAdmin());
+                       mHallOfResidenceEditText.setText(mStudent.getHallOfResidence());
+                       mRoomNumberEditText.setText(mStudent.getRoomNumber());
+                       mCurrentPlaceOfResidenceEditText.setText(mStudent.getCurrentResidenceAddress());
+                       mLevelSpinner.setSelection(getIndex(mLevelSpinner, mStudent.getLevel()));
+                       mGenderSpinner.setSelection(getIndex(mGenderSpinner, mStudent.getGender()));
                        showImage(mStudent.getPhotoUrl());
                    }
                 }
@@ -356,14 +415,18 @@ public class StudentsFragment extends Fragment {
                 userRef.child(mIndexNumberEditText.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        mUser  = dataSnapshot.getValue(User.class);
+                        if (dataSnapshot.exists()){
+                            mUser  = dataSnapshot.getValue(User.class);
 
-                        if (mUser.getPassword().isEmpty()){
-                            mUser.setPassword(UUID.randomUUID().toString().substring(0, 12));
+                            if (mUser != null){
+                                if (mUser.getPassword().isEmpty()){
+                                    mUser.setPassword(UUID.randomUUID().toString().substring(0, 12));
+                                }
+                            }
+                            UserFactory.get(getContext()).addUser(mUser);
+                            mDatabaseReference.child(mStudent.getStudentsId()).setValue(mStudent);
+                            UserFactory.get(getContext()).getUserReference("users", getActivity()).child(mUser.getRegistrationNumber()).setValue(mUser);
                         }
-                        UserFactory.get(getContext()).addUser(mUser);
-                        mDatabaseReference.child(mStudent.getStudentsId()).setValue(mStudent);
-                        UserFactory.get(getContext()).getUserReference("users", getActivity()).child(mUser.getRegistrationNumber()).setValue(mUser);
                     }
 
                     @Override
@@ -403,5 +466,13 @@ public class StudentsFragment extends Fragment {
                     .centerCrop()
                     .into(mProfileImageView);
         }
+    }
+    private int getIndex(Spinner spinner, String item){
+        for (int i = 0; i < spinner.getCount(); i++){
+            if (spinner.getItemAtPosition(i).toString().equals(item)){
+                return i;
+            }
+        }
+        return 0;
     }
 }

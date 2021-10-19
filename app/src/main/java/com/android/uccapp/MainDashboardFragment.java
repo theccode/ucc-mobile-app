@@ -1,13 +1,18 @@
 package com.android.uccapp;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,9 +21,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.uccapp.model.ConfigUtility;
+import com.android.uccapp.model.Student;
 import com.android.uccapp.model.User;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -28,12 +38,16 @@ public class MainDashboardFragment extends Fragment {
     private ImageView mProfileImageView;
     private ImageView mRegisterImageView;
     private TextView mUserNameTextView;
+    private ImageView mProfileImage;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
     private BottomNavigationView mBottomNavigationView;
     private static final String ARG_USER = "user_Id";
     private User mUser;
     private final String BUNDLE_USER = "com.android.uccapp.userId";
+    private CountDownTimer mCountDownTimer;
+    private ProgressDialog mProgressDialog;
+    private int i = 0;
 
     public static MainDashboardFragment newInstance(User user){
         Bundle arg = new Bundle();
@@ -49,6 +63,12 @@ public class MainDashboardFragment extends Fragment {
         mFirebaseDatabase = ConfigUtility.mFirebaseDatabase;
         mDatabaseReference = ConfigUtility.mFirebaseReference;
         mUser = (User) getArguments().getSerializable(ARG_USER);
+        mProgressDialog = new ProgressDialog(getContext());
+        mProgressDialog.setMessage("Thanks for your patronage, Bye!...");
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setProgress(i);
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mProgressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.GRAY));
     }
 
     @Nullable
@@ -74,7 +94,7 @@ public class MainDashboardFragment extends Fragment {
         mProfileImageView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent showStudentsProfile = new Intent(getActivity(), StudentProfileActivity.class);
+                Intent showStudentsProfile = UserProfileActivity.newIntent(getContext(), mUser);
                 startActivity(showStudentsProfile);
             }
         });
@@ -84,6 +104,19 @@ public class MainDashboardFragment extends Fragment {
             public void onClick(View view){
                 Intent intent = RegisterActivity.newIntent(getContext(), mUser);
                 startActivity(intent);
+            }
+        });
+        mProfileImage = (ImageView) view.findViewById(R.id.tvProfileImage);
+        mDatabaseReference.child(mUser.getRegistrationNumber()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Student student = dataSnapshot.getValue(Student.class);
+                Picasso.with(getContext()).load(student.getPhotoUrl()).resize(60,60).centerCrop().into(mProfileImage);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
             }
         });
         return view;
@@ -104,8 +137,34 @@ public class MainDashboardFragment extends Fragment {
                     Intent intent = new Intent(getContext(), LoginActivity.class);
                     startActivity(intent);
                     Objects.requireNonNull(getActivity()).finish();
+                    if (mProgressDialog != null){
+                        mProgressDialog.show();
+                    }
+                    mCountDownTimer = new CountDownTimer(2000, 1000) {
+                        @Override
+                        public void onTick(long l) {
+
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            if (mProgressDialog != null){
+                                mProgressDialog.dismiss();
+                                mProgressDialog = null;
+                            }
+                        }
+                    }.start();
             }
             return false;
         }
     };
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mProgressDialog != null){
+            mProgressDialog.dismiss();
+            mProgressDialog = null;
+        }
+    }
 }

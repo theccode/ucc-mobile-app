@@ -11,10 +11,16 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/UCCAppMaterialTheme">
-        <activity android:name=".CreateTimetableActivity">
-
-        </activity>
-        <activity android:name=".ResultViewActivity" />
+        <activity android:name=".UserProfileActivity" android:parentActivityName=".MainDashboardActivity"></activity>
+        <activity android:name=".FeeListActivity" />
+        <activity
+            android:name=".FinancierActivity"
+            android:parentActivityName=".FinancierDashboardActivity" />
+        <activity android:name=".TimeTableListActivity" />
+        <activity
+            android:name=".FinancierDashboardActivity"
+            android:launchMode="singleTop" />
+        <activity android:name=".CreateTimetableActivity" />
         <activity
             android:name=".GradeBookActivity"
             android:parentActivityName=".RegisteredStudentsListActivity" />
@@ -63,8 +69,7 @@
         <activity
             android:name=".StudentsListActivity"
             android:parentActivityName=".AdministratorActivity"
-            android:screenOrientation="portrait" />
-        <!-- LAUNCHER -->
+            android:screenOrientation="portrait" /> <!-- LAUNCHER -->
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"

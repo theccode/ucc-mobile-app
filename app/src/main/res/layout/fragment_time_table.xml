@@ -7,23 +7,25 @@
         android:id="@+id/tableLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
-        <TableRow android:padding="5dp" android:background="@color/colorPrimary" >
+        android:layout_marginTop="5dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp">
+        <TableRow android:padding="2dp"  android:background="@color/colorPrimary" >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@color/colorWhite"
                 android:textStyle="bold"
-                android:text="CODE"/>
+                android:text="CODE"
+                android:textSize="11dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@color/colorWhite"
                 android:textStyle="bold"
+                android:textSize="11dp"
                 android:text="TITLE"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -31,6 +33,7 @@
                 android:textColor="@color/colorWhite"
                 android:layout_weight="1"
                 android:textStyle="bold"
+                android:textSize="11dp"
                 android:text="DATE"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -38,6 +41,7 @@
                 android:textColor="@color/colorWhite"
                 android:layout_weight="1"
                 android:textStyle="bold"
+                android:textSize="11dp"
                 android:text="TIME"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -45,6 +49,7 @@
                 android:textColor="@color/colorWhite"
                 android:layout_weight="1"
                 android:textStyle="bold"
+                android:textSize="11dp"
                 android:text="VENUE"/>
         </TableRow>
     </TableLayout>
