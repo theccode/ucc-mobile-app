@@ -76,12 +76,12 @@ public class LoginFragment extends Fragment {
         mIndexNumberEditText = view.findViewById(R.id.etIndex);
         mPasswordEditText = view.findViewById(R.id.etPassword);
         mLoginButton = view.findViewById(R.id.btnLogin);
-//        mIndexNumberEditText.setText("PS/CSC/17/0060"); mPasswordEditText.setText("8cff7c3f-d22"); admin
+        mIndexNumberEditText.setText("PS/CSC/17/0060"); mPasswordEditText.setText("8cff7c3f-d22");
 //        mIndexNumberEditText.setText("PS/CSC/STAFF/0013"); mPasswordEditText.setText("0ce2e482-0eb"); staff
 //        mIndexNumberEditText.setText("PS/CSC/STAFF/0014"); mPasswordEditText.setText("69aaa62c-ade"); staff
 //        mIndexNumberEditText.setText("UCC/STAFF/FIN/0001"); mPasswordEditText.setText("9c3c0f84-d51"); finance officer
 //        mIndexNumberEditText.setText("PS/CSC/17/0006"); mPasswordEditText.setText("80ec76f4-9a6"); //student
-        mIndexNumberEditText.setText("PS/CSC/17/0004"); mPasswordEditText.setText("2d833105-c87"); //student
+//        mIndexNumberEditText.setText("PS/CSC/17/0004"); mPasswordEditText.setText("2d833105-c87"); //student
         mLoginButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
