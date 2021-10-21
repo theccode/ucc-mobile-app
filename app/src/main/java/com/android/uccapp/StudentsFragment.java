@@ -410,6 +410,7 @@ public class StudentsFragment extends Fragment {
                 mUser.setRegistrationNumber(mStudent.getStudentsId());
                 mUser.setFirstName(mStudent.getFirstName());
                 mUser.setLastName(mStudent.getLastName());
+                mUser.setPhotoUrl(mStudent.getPhotoUrl());
                 ConfigUtility.createFirebaseUtil("users", getActivity());
                 DatabaseReference userRef = ConfigUtility.mFirebaseReference;
                 userRef.child(mIndexNumberEditText.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {

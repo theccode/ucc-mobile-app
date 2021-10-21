@@ -11,7 +11,13 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/UCCAppMaterialTheme">
-        <activity android:name=".UserProfileActivity" android:parentActivityName=".MainDashboardActivity"></activity>
+        <activity android:name=".FeeActivity"></activity>
+        <activity
+            android:name=".FinanceActivity"
+            android:parentActivityName=".MainDashboardActivity" />
+        <activity
+            android:name=".UserProfileActivity"
+            android:parentActivityName=".MainDashboardActivity" />
         <activity android:name=".FeeListActivity" />
         <activity
             android:name=".FinancierActivity"

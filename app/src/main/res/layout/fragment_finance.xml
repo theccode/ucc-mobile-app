@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            />
+    </android.support.design.widget.AppBarLayout>
+    <TableLayout
+        android:id="@+id/tableLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp">
+        <TableRow android:padding="5dp" android:background="@color/colorPrimary" >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold"
+                android:text="SUMMARY OF FEE PAYMENT"
+                android:gravity="center"/>
+
+        </TableRow>
+        <TableRow android:padding="5dp" android:background="@color/colorAcc" android:layout_marginTop="1dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:text="Registration Number: "/>
+
+            <TextView
+                android:id="@+id/tvUserRegistrationNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_weight="10"
+                android:textStyle="bold"
+                android:text="0.00"/>
+        </TableRow>
+        <TableRow android:padding="5dp" android:background="@color/colorAcc" android:layout_marginTop="1dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:text="Currency: "/>
+
+            <TextView
+                android:id="@+id/tvCurrency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_weight="10"
+                android:textStyle="bold"
+                android:text="GH₵"/>
+        </TableRow>
+        <TableRow android:padding="5dp" android:background="@color/colorAcc" android:layout_marginTop="1dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:text="Existing Balance: "/>
+
+            <TextView
+                android:id="@+id/tvExistingBalance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_weight="10"
+                android:textStyle="bold"
+                android:text="0.00"/>
+        </TableRow>
+        <TableRow android:padding="5dp" android:background="@color/colorAcc" android:layout_marginTop="1dp">
+            <TextView
+                android:id="@+id/tvAcademicYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:text="Fee For: "/>
+
+            <TextView
+                android:id="@+id/tvFeeForAcademicYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_weight="10"
+                android:textStyle="bold"
+                android:text="0.00"/>
+        </TableRow>
+        <TableRow android:padding="5dp" android:background="@color/colorAcc" android:layout_marginTop="1dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:text="Payment made for this year: "/>
+
+            <TextView
+                android:id="@+id/tvPaymentMadeForThisYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_weight="10"
+                android:textStyle="bold"
+                android:text="0.00"/>
+        </TableRow>
+        <TableRow android:padding="5dp" android:background="@color/colorAcc" android:layout_marginTop="1dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:text="Your Total Payment: "/>
+
+            <TextView
+                android:id="@+id/tvTotalPayment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_weight="10"
+                android:textStyle="bold"
+                android:text="0.00"/>
+        </TableRow>
+        <TableRow android:padding="5dp" android:background="@color/colorAcc" android:layout_margin="1dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:text="Balance Carry Forward: "/>
+
+            <TextView
+                android:id="@+id/tvBalanceCarryForward"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_weight="10"
+                android:textStyle="bold"
+                android:text="0.00"/>
+        </TableRow>
+    </TableLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+        <Button
+            android:id="@+id/btnMakePayment"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:text="Make Payment"
+            android:background="@drawable/button_bg"
+            android:textColor="@color/colorAcc"
+            android:textStyle="bold"/>
+    </LinearLayout>
+</LinearLayout>

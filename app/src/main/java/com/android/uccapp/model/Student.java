@@ -23,7 +23,6 @@ public class Student {
     private boolean mIsAdmin;
 
     public Student() {
-        mDateOfBirth = new Date();
     }
 
     public Student(String firstName, String lastName, String department, String programme, String major, String gender, Date dateOfBirth, String level, String phone, String emailAddress, Map<String, String> courses, String photoUrl, boolean isAdmin) {

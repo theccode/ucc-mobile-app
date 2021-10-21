@@ -90,7 +90,7 @@
                 app:layout_constraintDimensionRatio="H,1:1"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/finance">
+                app:layout_constraintEnd_toStartOf="@id/llFinance">
                 <ImageView
                     android:id="@+id/ivAcademics"
                     android:layout_width="100dp"
@@ -110,7 +110,7 @@
                     android:textStyle="bold" />
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/finance"
+                android:id="@+id/llFinance"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="22dp"
@@ -182,9 +182,9 @@
                 android:orientation="vertical"
                 android:background="@drawable/white_rectangular_bg"
                 app:layout_constraintDimensionRatio="H,1:1"
-                app:layout_constraintStart_toStartOf="@id/finance"
-                app:layout_constraintTop_toBottomOf="@id/finance"
-                app:layout_constraintEnd_toEndOf="@id/finance"
+                app:layout_constraintStart_toStartOf="@id/llFinance"
+                app:layout_constraintTop_toBottomOf="@id/llFinance"
+                app:layout_constraintEnd_toEndOf="@id/llFinance"
                 >
                 <ImageView
                     android:id="@+id/ivProfile"

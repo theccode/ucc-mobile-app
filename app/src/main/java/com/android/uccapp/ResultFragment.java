@@ -1,5 +1,7 @@
 package com.android.uccapp;
 
+import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -17,6 +19,7 @@ import android.widget.TextView;
 
 import com.android.uccapp.model.ConfigUtility;
 import com.android.uccapp.model.Course;
+import com.android.uccapp.model.CourseRegisterationOpening;
 import com.android.uccapp.model.Grade;
 import com.android.uccapp.model.GradeBook;
 import com.google.firebase.database.DataSnapshot;
@@ -46,6 +49,8 @@ public class ResultFragment extends Fragment {
     private TextView mCRTextView;
     private TextView mGDTextView;
     private TextView mGPTextView;
+    private TextView mAcademicYear;
+    private TextView mSemesterTextView;
     private TextView mAcademicYearTextView;
     private List<String> mCourseNames;
     private List<String> mCreditHours;
@@ -118,7 +123,8 @@ public class ResultFragment extends Fragment {
                             mCourseCodeTextView = new TextView(getContext());
                             mCourseCodeTextView.setLayoutParams(tvLayoutParams);
                             mCourseCodeTextView.setTextColor(Color.parseColor("#233F8F"));
-
+                            mAcademicYear = view.findViewById(R.id.tvAcademicYear);
+                            mAcademicYear.setLayoutParams(tvLayoutParams);
                             mGDTextView =  new TextView(getContext());
                             mGDTextView.setLayoutParams(tvLayoutParams);
                             mGDTextView.setTextColor(Color.parseColor("#233F8F"));
@@ -136,15 +142,39 @@ public class ResultFragment extends Fragment {
                             Log.d("HOUR", course.getCreditHours());
                             mCourseTitleTextView.setText(course.getCourseName());
                             Iterator it = creditWeight.entrySet().iterator();
-                            float gp = 0.0f;
+
                             while (it.hasNext()){
                                 Map.Entry itemPair =  (Map.Entry) it.next();
                                 String key = (String) itemPair.getKey();
                                 String value = (String) itemPair.getValue();
+
                                 if (data.getValue().equals(key)){
+                                    List<Double> creditDoubles = new ArrayList<>();
+                                    List<Double> gps = new ArrayList<>();
+                                    Double.parseDouble(course.getCreditHours().split(" ")[0]);
                                     mGPTextView.setText(String.valueOf(Double.parseDouble(value) * Double.parseDouble(course.getCreditHours().split(" ")[0])));
+                                    creditDoubles.add(Double.parseDouble(course.getCreditHours().split(" ")[0] ));
+                                    gps.add(Double.parseDouble(String.valueOf(Double.parseDouble(value) * Double.parseDouble(course.getCreditHours().split(" ")[0]))));
+
                                 }
                             }
+
+                            ConfigUtility.createFirebaseUtil("courseRegistrationOpening", getActivity());
+                            DatabaseReference courseRef = ConfigUtility.mFirebaseReference;
+                            courseRef.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    CourseRegisterationOpening opening = dataSnapshot.getValue(CourseRegisterationOpening.class);
+                                    mAcademicYear.setText("Academic Year: " + opening.getAcademicYear());
+                                    mSemesterTextView = view.findViewById(R.id.tvSemester);
+                                    mSemesterTextView.setText("Semester: " + opening.getSemester());
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
                             mCRTextView.setText(course.getCreditHours().split(" ")[0]);
                             mCourseCodeTextView.setText(data.getKey());
                             mGDTextView.setText(data.getValue().toString());

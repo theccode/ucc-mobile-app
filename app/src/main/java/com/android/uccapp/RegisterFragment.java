@@ -24,6 +24,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.uccapp.model.ConfigUtility;
 import com.android.uccapp.model.CourseForRegistration;
@@ -215,6 +216,7 @@ public class RegisterFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                button.setText("SAVE");
                 printDocument(button);
                 ConfigUtility.createFirebaseUtil("registeredStudents", getActivity());
                 DatabaseReference registeredStudentsRef = ConfigUtility.mFirebaseReference;
@@ -237,6 +239,7 @@ public class RegisterFragment extends Fragment {
                 gradeBook.setCourseCodesAndGrades(courseCodesAndGrades);
                 gradeBook.setRegistrationNumber(mUser.getRegistrationNumber());
                 studentsGradeBookRef.child(gradeBook.getRegistrationNumber()).setValue(gradeBook);
+                Toast.makeText(getActivity(), "Registered!", Toast.LENGTH_LONG);
             }
         });
     }

@@ -1,5 +1,6 @@
 package com.android.uccapp;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -131,7 +132,11 @@ public class UserProfileFragment extends Fragment {
             }
         });
         mDateOfBirthEditText = (EditText) view.findViewById(R.id.etDateOfBirth);
-
+        try {
+            mStudent.setDateOfBirth(mSimpleDateFormat.parse(mDateOfBirthEditText.getText().toString()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         mLevelEditText = (EditText) view.findViewById(R.id.etLevel);
         mLevelEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -241,12 +246,24 @@ public class UserProfileFragment extends Fragment {
     public void onPause() {
         super.onPause();
             mStudent.setStudentsId(mUser.getRegistrationNumber());
-        try {
-            mStudent.setDateOfBirth(mSimpleDateFormat.parse(mDateOfBirthEditText.getText().toString()));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        mDatabaseReference.child(mUser.getRegistrationNumber()).setValue(mStudent);
+            mDatabaseReference.child(mUser.getRegistrationNumber()).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    Student student = dataSnapshot.getValue(Student.class);
+                    mStudent.setPhotoUrl(student.getPhotoUrl());
+                    try {
+                        mStudent.setDateOfBirth(mSimpleDateFormat.parse(mDateOfBirthEditText.getText().toString()));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    mDatabaseReference.child(mUser.getRegistrationNumber()).setValue(mStudent);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
     }
 
     @Override
@@ -269,7 +286,7 @@ public class UserProfileFragment extends Fragment {
                            mLevelEditText.setKeyListener(null);
                            mGenderEditText.setText(student.getGender());
                            mGenderEditText.setKeyListener(null);
-                           mDateOfBirthEditText.setText(student.getDateOfBirth().toString());
+                           mDateOfBirthEditText.setText(mSimpleDateFormat.format(student.getDateOfBirth()));
                            mDateOfBirthEditText.setKeyListener(null);
                            mEmailAdressEditText.setText(student.getEmailAddresss());
                            mPhoneEditText.setText(student.getPhone());

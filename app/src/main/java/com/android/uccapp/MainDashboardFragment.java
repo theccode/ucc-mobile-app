@@ -18,7 +18,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.uccapp.model.ConfigUtility;
 import com.android.uccapp.model.Student;
@@ -38,6 +40,7 @@ public class MainDashboardFragment extends Fragment {
     private ImageView mProfileImageView;
     private ImageView mRegisterImageView;
     private TextView mUserNameTextView;
+    private LinearLayout mFinanceLinearLayout;
     private ImageView mProfileImage;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
@@ -117,6 +120,14 @@ public class MainDashboardFragment extends Fragment {
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
+            }
+        });
+        mFinanceLinearLayout = (LinearLayout) view.findViewById(R.id.llFinance);
+        mFinanceLinearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = FinanceActivity.newIntent(getContext(), mUser);
+                startActivity(intent);
             }
         });
         return view;

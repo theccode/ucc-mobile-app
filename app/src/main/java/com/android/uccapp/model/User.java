@@ -9,6 +9,7 @@ public class User implements Serializable {
     private String firstName;
     private String lastName;
     private String password;
+    private String photoUrl;
     private boolean isAdmin;
     private boolean isLecturer;
     private boolean isFinancier;
@@ -68,6 +69,14 @@ public class User implements Serializable {
 
     public void setRegistrationNumber(String registrationNumber) {
         this.registrationNumber = registrationNumber;
+    }
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
     }
 
     public boolean isAdmin() {
